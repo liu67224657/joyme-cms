@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>内容管理--阅读心情组添加</title>
+<link href='css/base.css' rel='stylesheet' type='text/css'>
+<script src="http://static.joyme.com/js/jquery-1.9.1.min.js" language="javascript"></script>
+<script language='javascript'>
+function checkSubmit(){
+	if(document.form1.title.value==""){
+		alert("心情组名称不能为空！");
+		document.form1.title.focus();
+		return false;
+	}
+	if(document.form1.image1.value==""){
+		alert("‘不错’表情图不能为空！");
+		return false;
+	}
+	if(document.form1.image2.value==""){
+		alert("‘冏’表情图不能为空！");
+		return false;
+	}
+	if(document.form1.image3.value==""){
+		alert("‘难过’表情图不能为空！");
+		return false;
+	}
+	if(document.form1.image4.value==""){
+		alert("‘嫌弃’表情图不能为空！");
+		return false;
+	}
+	var obj = document.getElementById("status");
+	var index = obj.selectedIndex; // 选中索引
+	var text = obj.options[index].text; // 选中文本
+	var value = obj.options[index].value; // 选中值
+	var cmshost = 'http://' + window.location.host;
+	if(value == 1){
+		var haveothreuse = true;
+		$.ajax({
+			url: cmshost+'/ja/joyme_readimg.php',
+			type: "post",
+			async: false,
+			data: {dopost:'checkuse'},
+			success: function (req) {
+				if(req == 'yes'){
+					haveothreuse = false;
+				}
+			},
+			error: function () {
+				alert('checkuse程序错误');
+			}
+		});console.log('haveothreuse', haveothreuse);
+		if(haveothreuse && !confirm('只能启用一组心情组，是否替换为当前的选择？')){
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="19" background="images/tbg.gif" bgcolor="#E7E7E7"> 
+      <table width="96%" border="0" cellspacing="1" cellpadding="1">
+        <tr> 
+          <td width="24%" style="padding-left:10px;"><b><strong>新增心情组</strong></b> </td>
+          <td width="76%" align="right"><strong><a href="joyme_readimg.php"><u>心情组管理</u></a></strong></td>
+        </tr>
+      </table></td>
+</tr>
+<tr>
+    <td height="215" align="center" valign="top" bgcolor="#FFFFFF">
+	<form name="form1" action="joyme_readimg_add.php" onSubmit="return checkSubmit();" method="post"  enctype="multipart/form-data">
+	<input type="hidden" name="dopost" value="add" />
+  <table width="98%" border="0" cellspacing="1" cellpadding="1">
+          <tr> 
+            <td width="16%" height="30">心情组名称</td>
+            <td width="84%"  style="text-align:left;"><input name="title" type="text" id="title" size="16" style="width:200px" /><span style="color:red;">*必填项</span>
+            </td>
+          </tr>
+		  <tr> 
+            <td width="16%" height="30">状态</td>
+            <td width="84%"  style="text-align:left;">
+			<select name="status" id="status">
+				<option value="0">停用</option>
+				<option value="1">启用</option>
+			</select>
+			<span style="color:red;">发布的状态</span>
+            </td>
+          </tr>
+		  <tr> 
+            <td width="16%" height="30">不错</td>
+            <td width="84%"  style="text-align:left;">
+				<img src="" style="width:100px;height:100px;" id="imgbox1">
+				<input name="img1" type="hidden" id="img1" size="16"/>
+				<input name="image1" type="file" id="image1" accept="image/*">
+				<span style="color:red;">*必填项</span>
+            </td>
+          </tr>
+		  <tr> 
+            <td width="16%" height="30">冏</td>
+            <td width="84%"  style="text-align:left;">
+				<img src="" style="width:100px;height:100px;" id="imgbox2">
+				<input name="img2" type="hidden" id="img2" size="16"/>
+				<input name="image2" type="file" id="image2" accept="image/*">
+				<span style="color:red;">*必填项</span>
+            </td>
+          </tr>
+		  <tr> 
+            <td width="16%" height="30">难过</td>
+            <td width="84%"  style="text-align:left;">
+				<img src="" style="width:100px;height:100px;" id="imgbox3">
+				<input name="img3" type="hidden" id="img3" size="16"/>
+				<input name="image3" type="file" id="image3" accept="image/*">
+				<span style="color:red;">*必填项</span>
+            </td>
+          </tr>
+		  <tr> 
+            <td width="16%" height="30">嫌弃</td>
+            <td width="84%"  style="text-align:left;">
+				<img src="" style="width:100px;height:100px;" id="imgbox4">
+				<input name="img4" type="hidden" id="img4" size="16"/>
+				<input name="image4" type="file" id="image4" accept="image/*">
+				<span style="color:red;">*必填项</span>
+            </td>
+          </tr>
+          <tr> 
+            <td height="60">&nbsp;</td>
+            <td>
+				<button>提交</button>
+				<!--<input type="submit" name="Submit" value="提交" class="coolbg np" />-->
+				<a href="joyme_readimg.php"><button type="button">返回</button></a>
+				备注：文字描述请放在图片里
+			</td>
+          </tr>
+        </table>
+      </form>
+	  </td>
+</tr>
+</table>
+<script>
+$(function(){
+	$("img[id^=imgbox][src='']").hide();
+
+	$("input[id^=image]").change(function(event){
+		var itemId = $(this).attr('id');
+		var no = itemId.replace('image', '');
+		//大小
+		var files = event.target.files;
+		var file = files[0];
+		var filesize = file.size / 1024;
+		var imgwidth = 0;
+		var imgheight = 0;
+		
+		var reader = new FileReader();
+		reader.onload = function(){
+			// 图片预览
+			var dataURL = reader.result;
+			var imgObjPreview=document.getElementById("imgbox"+no);
+			imgObjPreview.src = dataURL;
+			document.getElementById("imgbox"+no).style.display = 'inline';
+			//尺寸
+			var image = new Image();
+			image.src = reader.result;
+			image.onload = function() {
+				imgwidth = image.width;
+				imgheight = image.height;
+			};
+		}
+		reader.readAsDataURL(file);
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="../internal.js"></script>
+    <link rel="stylesheet" type="text/css" href="tips.css">
+</head>
+<body>
+    <div id="bg_container" class="wrapper">
+        <div id="tabHeads" class="tabhead">
+            <span class="focus" data-content-id="normal">插入类型</span>
+        </div>
+        <div id="tabBodys" class="tabbody">
+            <div id="normal" class="panel focus">
+                <fieldset class="bgarea">
+                    <legend><var id="lang_background_set"></var></legend>
+                    <div class="content">
+                        <div id="content_cats">
+                            <label><input id="yuanchuang" class="iptradio" type="radio" name="t" value="yuanchuang" checked="checked">原创</label>
+                            <label><input id="zhuanzai" class="iptradio" type="radio" name="t" value="zhuanzai">转载</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div id="imgManager" class="panel">
+                <div id="imageList" style=""></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+		dialog.onok = function (){
+			var cats = $G('content_cats').children;
+			var cat = '';
+			for (var i = 0; i < cats.length; i++) {
+				if(cats[i].firstChild.checked){
+					cat = cats[i].firstChild.value;
+				}
+			}
+			//var content = $G('content');
+			editor.execCommand('tips', cat);
+			dialog.close();
+		};
+	</script>
+</body>
+</html>

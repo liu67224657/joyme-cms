@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>着迷网-1</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="/article/templets/default/style/dedecms.css" rel="stylesheet" media="screen" type="text/css" />
+<link rel="stylesheet" href="/article/templets/default/style/dedecms_skins_0.css" type="text/css" id="cssfile" />
+<script language="javascript" type="text/javascript" src="/article/include/dedeajax2.js"></script>
+<script language="javascript" type="text/javascript" src="/article/images/js/j.js" ></script>
+<script language="javascript" type="text/javascript" src="/article/templets/default/js/pic_scroll.js"></script>
+<script language="javascript" type="text/javascript" src="/article/templets/default/js/jquery.cookie.js"></script>
+<script language="javascript" type="text/javascript" src="/article/templets/default/js/changeSkin.js"></script>
+<script language="javascript" type="text/javascript">
+<!--
+	$(function(){
+		$("dl.tbox dt span.label a[_for]").mouseover(function(){
+			$(this).parents("span.label").children("a[_for]").removeClass("thisclass").parents("dl.tbox").children("dd").hide();
+			$(this).addClass("thisclass").blur();
+			$("#"+$(this).attr("_for")).show();
+		});
+		$("a[_for=uc_member]").mouseover();
+	});
+	
+	function CheckLogin(){
+	  var taget_obj = document.getElementById('_userlogin');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/article/member/ajax_loginsta.php");
+	  DedeXHTTP = null;
+	}
+	
+	function multi(pagenum,tagid)
+	{
+	  var taget_obj = document.getElementById(tagid);
+	  var taget_obj_page = document.getElementById("page_"+tagid);
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/plus/arcmulti.php?mtype=0&pnum="+pagenum+'&tagid='+tagid);
+	  myajax = new DedeAjax(taget_obj_page,false,false,'','','');
+	  myajax.SendGet2("/plus/arcmulti.php?mtype=1&pnum="+pagenum+'&tagid='+tagid);
+	  DedeXHTTP = null;
+	}
+	
+	function check(){
+		if(document.formsearch.searchtype.value=="")
+		document.formsearch.action="http://www.google.cn/custom"
+		else
+		document.formsearch.action="/article/plus/search.php"
+	} 
+
+-->
+</script>
+</head>
+<body class="index">
+<div class="header">
+  <script language="javascript" type="text/javascript">
+	window.onload=function (){
+		setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+	}
+  </script>
+    <div class="header_top w960">     
+     <ul id="dedecms_skins">
+        <li id="dedecms_skins_0" title="绿色">绿色</li>
+		<li id="dedecms_skins_1" title="蓝色">蓝色</li>
+		<li id="dedecms_skins_2" title="红色">红色</li>
+		<li id="dedecms_skins_3" title="桃红色">桃红色</li>
+		<li id="dedecms_skins_4" title="黑色">黑色</li>
+		<li id="dedecms_skins_5" title="褐色">褐色</li>
+      </ul>
+     <span id="time" class="time"></span>
+     <div class="toplinks"><a href="/article/plus/heightsearch.php" target="_blank">高级搜索</a>|<a href="/article/data/sitemap.html" target="_blank">网站地图</a>|<a href="/articletags.php">TAG标签</a>|<a href="/article/data/rssmap.html">RSS订阅</a><span>【<a href=""onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.joyme.com');">设为首页</a>】【<a href="javascript:window.external.AddFavorite('http://www.joyme.com','着迷网')">加入收藏</a>】</span></div>
+    </div>
+	<div class="top w960 center">
+      <div class="title">
+        <h1><a href="http://www.joyme.com"><img src="/article/templets/default/images/logo.gif" height="54" width="216" alt="着迷网"/></a> </h1>
+      </div>
+
+       
+	</div><!-- //top -->
+	<!-- //菜单 -->
+	<div class="module blue mT10 wrapper w963">
+  	<div class="top">
+    	<div class="t_l"></div>
+    	<div class="t_r"></div>
+    	<!-- //如果不使用currentstyle，可以在channel标签加入 cacheid='channeltoplist' 属性提升性能 -->
+    <div id="navMenu">
+    	<ul>
+      	<li><a href='/article/'><span>主页</span></a></li>
+      	
+      	<li><a href='/article/rss/'  rel='dropmenu348'><span>RSS总栏目</span></a></li>
+      	
+      	<li><a href='/article/news/'  rel='dropmenu1'><span>新闻中心</span></a></li>
+      	
+      	<li><a href='/article/vip/'  rel='dropmenu203'><span>重点游戏专区</span></a></li>
+      	
+      	<li><a href='/article/360hezuo/'  rel='dropmenu65'><span>360合作专区</span></a></li>
+      	
+      	<li><a href='/article/sougouh/'  rel='dropmenu546'><span>搜狗合作专区</span></a></li>
+      	
+      	<li><a href='/article/zt/'  rel='dropmenu61'><span>专题栏目</span></a></li>
+      	
+      	<li><a href='/article/yxgl/' ><span>游戏攻略</span></a></li>
+      	
+      	<li><a href='/article/newwjjl/' ><span>新玩家交流</span></a></li>
+      	
+      	<li><a href='/article/teshu/'  rel='dropmenu318'><span>特殊调用栏目</span></a></li>
+      	
+      	<li><a href='/article/wikis/'  rel='dropmenu564'><span>wiki聚合页</span></a></li>
+      	
+    	</ul>
+    </div>	
+    <div class="search">
+      <form  name="formsearch" action="" onSubmit="check();">
+      <input type="hidden" name="domains" value="www.dedecms.com">
+        <div class="form">
+          <h4>搜索</h4>
+           <input type="hidden" name="kwtype" value="0" />
+           <input name="q" type="text" class="search-keyword" id="search-keyword" value="在这里搜索..." onfocus="if(this.value=='在这里搜索...'){this.value='';}"  onblur="if(this.value==''){this.value='在这里搜索...';}" />
+           <select name="searchtype" class="search-option" id="search-option">
+               <option value="" selected='1'>google搜索</option>
+               <option value="titlekeyword">站内搜索</option>
+           </select>
+          <button type="submit" class="search-submit">搜索</button>
+        </div>
+        <input type="hidden" name="client" value="pub-9280232748837488">
+        <input type="hidden" name="forid" value="1">
+    	<input type="hidden" name="ie" value="UTF-8">
+    	<input type="hidden" name="oe" value="UTF-8">
+    	<input type="hidden" name="safe" value="active">
+    	<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1">
+    	<input type="hidden" name="hl" value="zh-CN">
+        </form>
+        <div class="tags">
+          <h4>热门标签:</h4>
+          <ul>
+          
+            <li><a href='/article/article/tags/12184_1.html'>ios</a></li>
+          
+            <li><a href='/article/article/tags/12182_1.html'>安卓</a></li>
+          
+            <li><a href='/article/article/tags/20139_1.html'>战舰少女ios</a></li>
+          
+            <li><a href='/article/article/tags/124_1.html'>炉石传说</a></li>
+          
+            <li><a href='/article/article/tags/20242_1.html'>坚果G1</a></li>
+          
+            <li><a href='/article/article/tags/13400_1.html'>《</a></li>
+          
+            <li><a href='/article/article/tags/13402_1.html'>》</a></li>
+          
+            <li><a href='/article/article/tags/12248_1.html'>评测</a></li>
+          
+            <li><a href='/article/article/tags/2063_1.html'>刀塔传奇</a></li>
+          
+            <li><a href='/article/article/tags/13409_1.html'>的</a></li>
+          
+          </ul>
+        </div>
+    </div><!-- //search -->
+		</div>
+	</div>
+</div><!-- //header -->
+
+<!-- /header -->
+<div class="w960 center clear mt1">
+  <div class="pleft">
+    <div class="bignews">
+    <!--头条-->
+      <div class="onenews">      
+      	<h2><a href="/article/vip/hs/zjgx/2014101453996.html">中日擂台赛日本区选手名...</a></h2>
+        <p>《炉石传说》黄金挑战赛中日擂台赛日本区的线下选拔赛，昨日在东京都千代田落下帷幕。
+ReneKuroi , Hitokage , yottiy4 , sohu , maruku0（冠军，同时成为WECG2014的代表）五位日本选手成...<a href="/article/vip/hs/zjgx/2014101453996.html">[查看全文]</a></p>
+
+      </div>
+      <!-- /onenews -->
+      <div class="d1">
+      	<div class='d1arc'><a href="/article/vip/hs/yxsp/2014101353713.html">《炉石游戏厅》第七期</a></div>
+<div class='d1arc'><a href="/article/vip/hs/zjgx/2014101153604.html">炉石蓝推：安卓版炉石客...</a></div>
+<div class='d1arc'><a href="/article/vip/hs/zjgx/2014101053409.html">黄金公开赛成都站 重磅消...</a></div>
+<div class='d1arc'><a href="/article/news/blue/201410/1053340.html">游戏大镖客第三期 谈漫威...</a></div>
+
+      </div>
+      <!--/头条-->
+    	<div class='newarticle'>最新文章</div>
+      <ul class="c2 ico1">
+      <!--最新文档-->
+      <li><a href="/article/news/official/201410/1554166.html">原汁原味的改编大作 《武极...</a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554161.html">海岛奇兵10月15日停机维护公...</a></li>
+<li><a href="/article/vip/hs/sszb/2014101554162.html">暴雪嘉年华炉石中国队整装...</a></li>
+<li><a href="/article/news/asiangames/201410/1554165.html">《最终幻想Record Keeper》CM公...</a></li>
+<li><a href="/article/news/official/201410/1554158.html">喜大普奔 来JJ比赛抢华为荣...</a></li>
+<li><a href="/article/vip/bwlb2/news/2014101554164.html">《保卫萝卜2》第89关攻略...</a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554159.html">海岛奇兵玩家心得：清图的...</a></li>
+<li><a href="/article/vip/hs/ss/sp/2014101554157.html">欧服Savjz大王术2-1级天梯4...</a></li>
+<li><a href="/article/news/official/201410/1554155.html">《植物大战僵尸：全明星》...</a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554153.html">海岛奇兵NPC岛屿绿手指2进攻...</a></li>
+<li><a href="/article/vip/bwlb2/news/2014101554156.html">《保卫萝卜2》第88关攻略...</a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554150.html">海岛奇兵安卓版高居下载榜...</a></li>
+<li><a href="/article/vip/hs/tt/sp/2014101554152.html">VGH Cup半决赛 Amaz vs Forsen</a></li>
+<li><a href="/article/news/official/201410/1554148.html">《魁拔》手游免费版今日正...</a></li>
+
+      <!--//最新文档-->
+      </ul>
+    </div>
+    <!-- /bignews -->
+    <div class="flashnews">
+      <!-- size: 280px * 192px -->
+<script language='javascript'>
+linkarr = new Array();
+picarr = new Array();
+textarr = new Array();
+var swf_width=280;
+var swf_height=192;
+//文字颜色|文字位置|文字背景颜色|文字背景透明度|按键文字颜色|按键默认颜色|按键当前颜色|自动播放时间|图片过渡效果|是否显示按钮|打开方式
+var configtg='0xffffff|0|0x3FA61F|5|0xffffff|0xC5DDBC|0x000033|2|3|1|_blank';
+var files = "";
+var links = "";
+var texts = "";
+//这里设置调用标记
+linkarr[1] = "/article/vip/hs/zjgx/2014091851715.html";
+picarr[1]  = "/article/uploads/140918/44-14091Q64403R3.jpg";
+textarr[1] = "《炉石传说》Q版表情包分...";
+linkarr[2] = "http://www.joyme.com/appwiki/qmfjdz/index.shtml";
+picarr[2]  = "/article/uploads/allimg/140818/38-140QQ625050-L.jpg";
+textarr[2] = "全民飞机大战";
+linkarr[3] = "http://www.joyme.com/appwiki/lscs/index.shtml";
+picarr[3]  = "/article/uploads/allimg/140818/38-140QQ624390-L.jpg";
+textarr[3] = "炉石传说";
+linkarr[4] = "http://www.joyme.com/appwiki/dtcq/index.shtml";
+picarr[4]  = "/article/uploads/allimg/140818/38-140QQ624010-L.jpg";
+textarr[4] = "刀塔传奇";
+linkarr[5] = "/article/games/youxihouchuanqi/dzsj/2014082049180.html";
+picarr[5]  = "/article/uploads/allimg/140820/38-140R02152240-L.png";
+textarr[5] = "悠嘻猴传说沙悟净属性图...";
+
+for(i=1;i<picarr.length;i++){
+if(files=="") files = picarr[i];
+else files += "|"+picarr[i];
+}
+for(i=1;i<linkarr.length;i++){
+if(links=="") links = linkarr[i];
+else links += "|"+linkarr[i];
+}
+for(i=1;i<textarr.length;i++){
+if(texts=="") texts = textarr[i];
+else texts += "|"+textarr[i];
+}
+document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ swf_width +'" height="'+ swf_height +'">');
+document.write('<param name="movie" value="/article/templets/default/images/bcastr3.swf"><param name="quality" value="high">');
+document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+document.write('<param name="FlashVars" value="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'">');
+document.write('<embed src="/article/templets/default/images/bcastr3.swf" wmode="opaque" FlashVars="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'&menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); document.write('</object>');
+</script>
+       </div>
+    <!-- /flashnews -->
+    <div class="latestnews">
+      <dl class="tbox light">
+        <dt class="light"><strong>特别推荐</strong></dt>
+        <dd class="light">
+          <ul class="d2 ico2">
+          	<li><span>09-18</span><a href="/article/vip/hs/yxsp/2014091851699.html">一可的炉石旅店：盗贼竞...</a></li>
+<li><span>07-17</span><a href="http://www.joyme.com/games/chinajoy/zhanhuizhiji/2014073147011.html">2014CJ周边集结第二弹</a></li>
+<li><span>07-15</span><a href="/article/games/chinajoy/xwlb/2014071544604.html">《安全管理规定》漫画</a></li>
+<li><span>07-10</span><a href="http://www.joyme.com/games/chinajoy/zhanhuizhiji/2014071043914.html">展馆全攻略</a></li>
+<li><span>07-09</span><a href="/article/vip/hs/yxsp/2014070943508.html">【一可的炉石旅店】战士...</a></li>
+<li><span>07-09</span><a href="/article/vip/hs/yxsp/2014070943502.html">【一可的炉石旅店】战士...</a></li>
+
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <!-- /latestnews -->
+    <div class="picnews">
+      <dl class="tbox light">
+        <dt class='light'><strong>图文资讯</strong></dt>
+        <dd class='light'>
+        <div class="infiniteCarousel">
+        <div class="wrapper">
+          <ul><li><a href="/article/news/official/201410/1554166.html"><img src='/article/uploads/allimg/141015/5_101515252D610.jpg' border='0' width='143' height='106' alt='原汁原味的改编大作 《武极天下》打造手游新标杆'><span class="title">原汁原味的改编大作 《武...</span></a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554161.html"><img src='/article/uploads/allimg/201410/1413357286920738-lp.jpg' border='0' width='143' height='106' alt='海岛奇兵10月15日停机维护公告'><span class="title">海岛奇兵10月15日停机维护...</span></a></li>
+<li><a href="/article/vip/hs/sszb/2014101554162.html"><img src='/article/uploads/allimg/201410/1413357249773589-lp.jpg' border='0' width='143' height='106' alt='暴雪嘉年华炉石中国队整装待发'><span class="title">暴雪嘉年华炉石中国队整...</span></a></li>
+<li><a href="/article/news/asiangames/201410/1554165.html"><img src='/article/uploads/allimg/141015/30-1410151516220-L.jpg' border='0' width='143' height='106' alt='《最终幻想Record Keeper》CM公布 FF记忆总集篇'><span class="title">《最终幻想Record Keeper》...</span></a></li>
+<li><a href="/article/news/official/201410/1554158.html"><img src='/article/uploads/allimg/141015/5_10151510461940.jpg' border='0' width='143' height='106' alt='喜大普奔 来JJ比赛抢华为荣耀平板了'><span class="title">喜大普奔 来JJ比赛抢华为...</span></a></li>
+<li><a href="/article/vip/bwlb2/news/2014101554164.html"><img src='/article/uploads/allimg/201410/1413357427180614-lp.jpg' border='0' width='143' height='106' alt='《保卫萝卜2》第89关攻略'><span class="title">《保卫萝卜2》第89关攻略...</span></a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554159.html"><img src='/article/uploads/allimg/141015/38_101515121A562.jpg' border='0' width='143' height='106' alt='海岛奇兵玩家心得：清图的注意事项'><span class="title">海岛奇兵玩家心得：清图...</span></a></li>
+<li><a href="/article/vip/hs/ss/sp/2014101554157.html"><img src='/article/uploads/allimg/141015/44-141015150G60-L.jpg' border='0' width='143' height='106' alt='欧服Savjz大王术2-1级天梯4B'><span class="title">欧服Savjz大王术2-1级天梯...</span></a></li>
+<li><a href="/article/news/official/201410/1554155.html"><img src='/article/uploads/allimg/141015/5_1015150SDG4.jpg' border='0' width='143' height='106' alt='《植物大战僵尸：全明星》联合小米手机推出定制主题'><span class="title">《植物大战僵尸：全明星...</span></a></li>
+<li><a href="/article/vip/bb/zxgx/2014101554153.html"><img src='/article/uploads/allimg/141015/38_101515063430H.jpg' border='0' width='143' height='106' alt='海岛奇兵NPC岛屿绿手指2进攻技巧'><span class="title">海岛奇兵NPC岛屿绿手指2进...</span></a></li>
+
+          </ul>
+        </div>
+        </div>
+        </dd>
+      </dl>
+    </div>
+    <!-- /picnews -->
+    <div class="listbox">
+	<dl class="tbox">
+        <dt><strong><a href="/article/rss/">RSS总栏目</a></strong><span class="more"><a href="/article/rss/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>10-15</span><a href="/article/syhbao/pingguoduan/201410/1453978.html">卡尔•蔡司也做VR眼镜</a></li>
+<li><span>10-15</span><a href="/article/syhbao/pingguoduan/201410/1453906.html">漫宅圈内：UFO你还忙得过来吗？</a></li>
+<li><span>10-15</span><a href="/article/syhbao/pingguoduan/201410/1453991.html">懒人福利：磁性鞋带，武装到鞋子</a></li>
+<li><span>10-15</span><a href="/article/syhbao/pingguoduan/201410/1453951.html">可悬停四轮遥控机实测</a></li>
+<li><span>10-14</span><a href="/article/syhbao/pingguoduan/201410/1353732.html">放弃“炉石”为几何？</a></li>
+<li><span>10-14</span><a href="/article/syhbao/pingguoduan/201410/1053382.html">「火星异种」手游今冬发布</a></li>
+<li><span>10-15</span><a href="/article/syhbao/pingguoduan/201410/1453909.html">用空气来当伞面的雨伞</a></li>
+<li><span>10-14</span><a href="/article/syhbao/pingguoduan/201410/1153526.html">「协奏同盟」战斗画面公布</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/news/">新闻中心</a></strong><span class="more"><a href="/article/news/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>10-15</span><a href="/article/news/official/201410/1554166.html">原汁原味的改编大作 《武极天下》打造手游新标...</a></li>
+<li><span>10-15</span><a href="/article/news/asiangames/201410/1554165.html">《最终幻想Record Keeper》CM公布 FF记忆总集篇</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554158.html">喜大普奔 来JJ比赛抢华为荣耀平板了</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554155.html">《植物大战僵尸：全明星》联合小米手机推出定...</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554148.html">《魁拔》手游免费版今日正式上线</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554145.html">安卓党战起来！ 《暗黑黎明》卓越封测今日开启...</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554142.html">《影之刃》角色设计师专访：首曝职业设计内幕...</a></li>
+<li><span>10-15</span><a href="/article/news/official/201410/1554140.html">盘点《龙之骑士团》玩家最爱的五大英雄</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/vip/">重点游戏专区</a></strong><span class="more"><a href="/article/vip/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>10-15</span><a href="/article/vip/bb/zxgx/2014101554161.html">海岛奇兵10月15日停机维护公告</a></li>
+<li><span>10-15</span><a href="/article/vip/hs/sszb/2014101554162.html">暴雪嘉年华炉石中国队整装待发</a></li>
+<li><span>10-15</span><a href="/article/vip/bwlb2/news/2014101554164.html">《保卫萝卜2》第89关攻略</a></li>
+<li><span>10-15</span><a href="/article/vip/bb/zxgx/2014101554159.html">海岛奇兵玩家心得：清图的注意事项</a></li>
+<li><span>10-15</span><a href="/article/vip/hs/ss/sp/2014101554157.html">欧服Savjz大王术2-1级天梯4B</a></li>
+<li><span>10-15</span><a href="/article/vip/bb/zxgx/2014101554153.html">海岛奇兵NPC岛屿绿手指2进攻技巧</a></li>
+<li><span>10-15</span><a href="/article/vip/bwlb2/news/2014101554156.html">《保卫萝卜2》第88关攻略</a></li>
+<li><span>10-15</span><a href="/article/vip/bb/zxgx/2014101554150.html">海岛奇兵安卓版高居下载榜榜首</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/360hezuo/">360合作专区</a></strong><span class="more"><a href="/article/360hezuo/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>12-10</span><a href="http://www.joyme.com/article/360hezuo/gametj/20131210/20405.html">掌娱天下《英雄联萌》今日安卓版上线</a></li>
+<li><span>12-10</span><a href="http://www.joyme.com/article/360hezuo/gametj/20131210/20404.html">《我叫MT》PC版12月13日不删档内测</a></li>
+<li><span>12-10</span><a href="http://www.joyme.com/article/360hezuo/gametj/20131210/20403.html">《醉萌将》游戏评测：属于自己的三国基地</a></li>
+<li><span>12-10</span><a href="http://www.joyme.com/article/360hezuo/gametj/20131210/20401.html">《火影大人》游戏评测：邪恶的九尾妖狐</a></li>
+<li><span>12-10</span><a href="/article/360hezuo/gametj/20131210/20405.html">掌娱天下《英雄联萌》今日安卓版上线</a></li>
+<li><span>12-10</span><a href="/article/360hezuo/gametj/20131210/20404.html">《我叫MT》PC版12月13日不删档内测 </a></li>
+<li><span>12-10</span><a href="/article/360hezuo/gametj/20131210/20403.html">《醉萌将》游戏评测：属于自己的三国基地</a></li>
+<li><span>12-10</span><a href="/article/360hezuo/gametj/20131210/20401.html">《火影大人》游戏评测：邪恶的九尾妖狐</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/sougouh/">搜狗合作专区</a></strong><span class="more"><a href="/article/sougouh/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>04-15</span><a href="/article/sougouh/rmtt/20140415/33055.html">中国周榜TOP10：全民炫舞空降登顶</a></li>
+<li><span>04-15</span><a href="/article/sougouh/rmtt/20140415/33053.html">《魔法宝贝》：小魔女的水晶球</a></li>
+<li><span>04-14</span><a href="/article/sougouh/rmtt/20140414/32795.html">“虐心系列”游戏：磨练自己的身心</a></li>
+<li><span>04-14</span><a href="/article/sougouh/rmtt/20140414/32794.html">全军出击：只属于英雄的冒险</a></li>
+<li><span>04-11</span><a href="/article/sougouh/rmtt/20140411/32606.html">继承与发展：香饽饽般的僵尸塔防</a></li>
+<li><span>04-11</span><a href="/article/sougouh/rmtt/20140411/32605.html">且玩且回忆：那些年一起射的小鸟</a></li>
+<li><span>04-10</span><a href="/article/sougouh/rmtt/20140410/32533.html">女生时间：萌物观察日记</a></li>
+<li><span>04-10</span><a href="/article/sougouh/rmtt/20140410/32532.html">炉石玩家Fan Art欣赏：吉安娜化身性感魔术师</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/zt/">专题栏目</a></strong><span class="more"><a href="/article/zt/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54147.html">植物大战僵尸2功夫世界黑洞第一天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54146.html">植物大战僵尸2功夫世界第二十九天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54143.html">植物大战僵尸2功夫世界第二十八天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54128.html">植物大战僵尸2功夫世界第二十七天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54116.html">植物大战僵尸2功夫世界第二十六天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54101.html">植物大战僵尸2功夫世界第二十五天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54076.html">植物大战僵尸2功夫世界第二十四天攻略</a></li>
+<li><span>10-15</span><a href="/article/zt/pvz2yxgl/20141015/54072.html">植物大战僵尸2功夫世界第二十三天攻略</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/yxgl/">游戏攻略</a></strong><span class="more"><a href="/article/yxgl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>06-16</span><a href="/article/yxgl/2014061640633.html">《史上最坑爹的游戏3》第24关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640632.html">《史上最坑爹的游戏3》第23关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640630.html">《史上最坑爹的游戏3》第22关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640628.html">《史上最坑爹的游戏3》第21关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640627.html">《史上最坑爹的游戏3》第20关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640626.html">《史上最坑爹的游戏3》第19关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640625.html">《史上最坑爹的游戏3》第18关通关攻略</a></li>
+<li><span>06-16</span><a href="/article/yxgl/2014061640624.html">《史上最坑爹的游戏3》第17关通关攻略</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/newwjjl/">新玩家交流</a></strong><span class="more"><a href="/article/newwjjl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>03-12</span><a href="/article/newwjjl/20140312/30100.html">揽小乔之铜雀兮 乐《一起闯三国》之与共</a></li>
+<li><span>03-12</span><a href="/article/newwjjl/20140312/30099.html">1-27 年兽乱入 《一起闯三国》年末大回馈</a></li>
+<li><span>03-12</span><a href="/article/newwjjl/20140312/30098.html">绝世神兵喜从天降 《一起闯三国》猛将狂兑不停...</a></li>
+<li><span>03-12</span><a href="/article/newwjjl/20140312/30097.html">《一起闯三国》神将周泰浴血来袭 高级名将兑不...</a></li>
+<li><span>03-12</span><a href="/article/newwjjl/20140312/30096.html">最热策略手游《一起闯三国》史诗级原画首曝</a></li>
+<li><span>03-11</span><a href="/article/newwjjl/20140311/29949.html">嗨皮海贼团百度贴吧签到有奖活动</a></li>
+<li><span>03-11</span><a href="/article/newwjjl/20140311/29948.html">《嗨皮海贼团》长期征稿活动</a></li>
+<li><span>03-05</span><a href="/article/newwjjl/20140305/29390.html">《琥珀之剑》封神台系统介绍</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/teshu/">特殊调用栏目</a></strong><span class="more"><a href="/article/teshu/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201312/2522684.html">古树旋律</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201402/2628688.html">女巫重生</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201312/2522730.html">海之号角</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201312/2622834.html">行尸走肉：袭击</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201401/2426045.html">踹飞大胡子</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/article/news/joymetsu/201401/1725152.html">暗影之刃</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201312/2722848.html">杰克指挥官</a></li>
+<li><span>12-24</span><a href="http://www.joyme.com/news/joymetsu/201312/2622831.html">雪地单车</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/wikis/">wiki聚合页</a></strong><span class="more"><a href="/article/wikis/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>10-13</span><a href="http://www.joyme.com/wiki/dtcq/86349.shtml">《刀塔传奇》觉醒英雄电魂解析</a></li>
+<li><span>10-13</span><a href="http://www.joyme.com/wiki/mt/86592.shtml">《全我叫MT》4.1版本平民征战十字军攻略</a></li>
+<li><span>10-13</span><a href="http://ttfw.joyme.com/86589.shtml">《天天富翁》限时S卡娜娜PK蓝冰</a></li>
+<li><span>10-13</span><a href="http://ttltf.joyme.com/">天天来塔防</a></li>
+<li><span>10-07</span><a href="http://www.joyme.com/wiki/lt/76617.shtml">《雷霆战机》装备对比分析</a></li>
+<li><span>10-06</span><a href="http://kkams.joyme.com/85766.shtml">《酷酷爱魔兽》平民不走寻常路</a></li>
+<li><span>10-05</span><a href="http://ml.joyme.com/85768.shtml">《魔力宝贝》副本职业输出差别</a></li>
+<li><span>10-04</span><a href="http://www.joyme.com/wiki/dtcq/85869.shtml">《刀塔传奇》潮汐觉醒显神威 最强坦克再次来袭...</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/newrdgl/">新热点攻略</a></strong><span class="more"><a href="/article/newrdgl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>08-27</span><a href="/article/newrdgl/20140827/49758.html">部落冲突9本高防螃蟹阵优缺点分析</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34575.html">《魂斗士》膜拜大神赢金锭 豪礼拿不停</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34573.html">最强阵容 《魂斗士》特别玩法之魂卡组合篇</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34572.html">灵魂助力 《魂斗士》魂魄升级进阶攻略</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34545.html">《魂斗士》主策解读 技能组合的完美结合</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34539.html">《魂斗士》新手战斗小贴士</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34532.html">《魂斗士》主角技能之铁拳</a></li>
+<li><span>04-25</span><a href="http://www.joyme.com/article/newxszn/20140425/34531.html">《魂斗士》主角技能之青电</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/newxszn/">新新手指南</a></strong><span class="more"><a href="/article/newxszn/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>04-25</span><a href="/article/newxszn/20140425/34582.html">《魂斗士》魂技副本掉落列表</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34575.html">《魂斗士》膜拜大神赢金锭 豪礼拿不停</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34573.html">最强阵容 《魂斗士》特别玩法之魂卡组合篇</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34572.html">灵魂助力 《魂斗士》魂魄升级进阶攻略</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34545.html">《魂斗士》主策解读 技能组合的完美结合</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34539.html">《魂斗士》新手战斗小贴士  </a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34532.html">《魂斗士》主角技能之铁拳</a></li>
+<li><span>04-25</span><a href="/article/newxszn/20140425/34531.html">《魂斗士》主角技能之青电</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/newgift/">礼包商城</a></strong><span class="more"><a href="/article/newgift/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>06-17</span><a href="/article/newgift/201406/17/40773.html">积分赚取攻略</a></li>
+<li><span>06-17</span><a href="/article/newgift/201406/17/40748.html">积分商城积分兑换须知</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/rdgl/">热点攻略</a></strong><span class="more"><a href="/article/rdgl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131112/17407.html">《口袋西游》游戏副本与好友</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131112/17408.html">《口袋西游》游戏角色技能介绍</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131112/17409.html">《口袋西游》游戏体力与碎片介绍</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131112/17411.html">《口袋西游》游戏仙将升级与战斗</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131112/17412.html">《口袋西游》游戏仙术系统</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newyxgl/20131113/17530.html">《北欧战歌》任务</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newyxgl/20131113/17524.html">《北欧战歌》竞技场</a></li>
+<li><span>11-15</span><a href="http://article.joyme.com/article/newxszn/20131113/17514.html">《北欧战歌》常见问题</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/xszn/">新手指南</a></strong><span class="more"><a href="/article/xszn/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>03-04</span><a href="/article/xszn/2014030429234.html">《三国耍大牌》兵法系统介绍</a></li>
+<li><span>03-04</span><a href="/article/xszn/2014030429233.html">《三国耍大牌》活动系统说明</a></li>
+<li><span>03-04</span><a href="/article/xszn/2014030429232.html">《三国耍大牌》卡牌玩法详解</a></li>
+<li><span>03-04</span><a href="/article/xszn/2014030429228.html">​《三国耍大牌》战斗规则介绍</a></li>
+<li><span>03-04</span><a href="/article/xszn/2014030429226.html">《三国耍大牌》教你分分钟逆袭土豪</a></li>
+<li><span>03-04</span><a href="/article/xszn/2014030429219.html">《三国耍大牌》游戏特色介绍</a></li>
+<li><span>10-23</span><a href="/article/xszn/20130723956.html">《植物大战僵尸2》新手小贴士</a></li>
+<li><span>09-28</span><a href="/article/xszn/201308074088.html">《植物大战僵尸2》僵尸特点详细介绍</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/hotnews/">新闻资讯</a></strong><span class="more"><a href="/article/hotnews/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>11-14</span><a href="/article/hotnews/20131114/17879.html">卡牌也狂欢 《大抗战》11.29首测全名星助阵</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17848.html">解放双手 《悟空去哪儿》贴心系统助你爽快撸...</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17824.html">胡莱游戏亮相MDCC 体验手游狂潮</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17813.html">《猎神OL》合服规则</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17812.html">《猎神OL》11月14日例行维护公告</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17785.html">感受战斗魅力《黑暗光年》的战神之路</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17784.html">搜狐畅游宣布代理韩国手游《Eastern Blade》</a></li>
+<li><span>11-14</span><a href="/article/hotnews/20131114/17783.html">突破渴望百强闯关《热血足球经理》赢取奖励</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/newyxgl/">新游戏攻略</a></strong><span class="more"><a href="/article/newyxgl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>08-27</span><a href="/article/newrdgl/20140827/49758.html">部落冲突9本高防螃蟹阵优缺点分析</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30281.html">《让麻将飞》新手入门攻略</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30280.html">&lt;让麻将飞&gt;进阶攻略-排兵布阵</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30279.html">《让麻将飞》千王之王攻略一：伤害流</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30278.html">《让麻将飞》千王之王攻略一：防守反擊做牌流...</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30277.html">《让麻将飞》千王之王攻略一：防守反擊做牌流...</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30276.html">《让麻将飞》千王之王攻略一：防守反擊做牌流...</a></li>
+<li><span>03-14</span><a href="/article/newyxgl/20140314/30264.html">《四大萌捕》猫小小情报攻略特刊之侠客全解析...</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/yxpc/">游戏评测</a></strong><span class="more"><a href="/article/yxpc/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>02-18</span><a href="/article/yxpc/2014021827833.html">《奇迹幻想》游戏评测：勇士的幻想史诗</a></li>
+<li><span>09-18</span><a href="/article/yxpc/2013091812100.html">《魂斗士》游戏测评：国产3DMMORPG新里程碑</a></li>
+<li><span>09-06</span><a href="/article/yxpc/2013090610140.html">《口袋联盟》游戏试玩评测</a></li>
+<li><span>08-29</span><a href="/article/yxpc/201308299112.html">《你为什么这么叼》之菇菇栽培实验室</a></li>
+<li><span>08-29</span><a href="/article/yxpc/201308299119.html">《你为什么这么叼》之啪啪英雄</a></li>
+<li><span>08-29</span><a href="/article/yxpc/201308299118.html">《你为什么这么叼》之羊感到羞耻</a></li>
+<li><span>08-29</span><a href="/article/yxpc/201308299117.html">《你为什么这么叼》之兄贵草泥马</a></li>
+<li><span>08-29</span><a href="/article/yxpc/201308299116.html">《你为什么这么叼》之猥琐皮卡丘</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/yxzb/">游戏周边</a></strong><span class="more"><a href="/article/yxzb/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>11-12</span><a href="/article/yxzb/picture/20131112/17427.html">这样的广告没问题吗？</a></li>
+<li><span>09-25</span><a href="/article/yxzb/picture/20130924/12502.html">白丝党的胜利</a></li>
+<li><span>09-23</span><a href="/article/yxzb/picture/20130923/12332.html">新番海报大放送</a></li>
+<li><span>09-22</span><a href="/article/yxzb/picture/20130922/12211.html">半泽直树颜艺收集</a></li>
+<li><span>09-22</span><a href="/article/yxzb/picture/20130922/12193.html">中秋过后上班累 来点黑丝爆乳大长腿</a></li>
+<li><span>09-16</span><a href="/article/yxzb/picture/20130916/11513.html">小清新二次元壁纸 偶尔为手机换换心情</a></li>
+<li><span>09-15</span><a href="/article/yxzb/picture/20130915/11409.html">夏末微凉妹子大鉴赏</a></li>
+<li><span>09-13</span><a href="/article/yxzb/picture/20130913/11195.html">螺旋猫《百万亚瑟王》青金石、诗多莲COS</a></li>
+
+          </ul>
+        </dd>
+      </dl><dl class="tbox">
+        <dt><strong><a href="/article/wjjl/">玩家交流</a></strong><span class="more"><a href="/article/wjjl/">更多...</a></span></dt>
+        <dd>
+          <ul class="d1 ico3">
+          <li><span>09-11</span><a href="/article/wjjl/201307251478.html">《植物大战僵尸2》五连发豌豆射手快速升级攻略...</a></li>
+<li><span>09-11</span><a href="/article/wjjl/201307312626.html">《植物大战僵尸2》钢琴僵尸打法攻略</a></li>
+<li><span>09-11</span><a href="/article/wjjl/201307312627.html">《植物大战僵尸2》五连发豌豆射手升级攻略</a></li>
+<li><span>09-11</span><a href="/article/wjjl/201307312629.html">《植物大战僵尸2》入门攻略</a></li>
+<li><span>08-30</span><a href="/article/wjjl/201308063917.html">《保卫萝卜》BOSS战 第一关</a></li>
+<li><span>08-30</span><a href="/article/wjjl/201307292058.html">《保卫萝卜》拟人手绘之软绵绵的大便</a></li>
+<li><span>08-23</span><a href="/article/wjjl/201307292053.html">《滑雪大冒险》扮成兵马俑搭乘任意载具经过2...</a></li>
+<li><span>08-14</span><a href="/article/wjjl/201308125471.html">《侠盗猎车手罪恶都市》主线攻略八</a></li>
+
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <!-- /listbox -->
+  </div>
+  <!-- /pleft -->
+  <div class="pright">
+    <div class="usercenter">
+      <dl class="tbox light">
+        <dt class='light'> <strong>互动中心</strong> <span class="label"> <a href="#" _for="uc_digg">踩踩</a> <a href="#" _for="uc_comment">评论</a> <a href="#" _for="uc_member">会员</a> </span> </dt>
+        <dd id="loading"> 正在载入,请稍候... </dd>
+        <dd id="uc_digg">
+          <ul class="f1">
+     		<li> <a href="/article/news/official/201409/1551218.html">AppleWatch为什么是方的？</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551219.html">鞋垫也能智能化</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551220.html">数码故障和中美洲神秘文化的碰撞...</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551221.html">在看脸的世界，最可怕的是...</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551222.html">勇敢的踏上一场说P就P的旅行</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551223.html">SNK公布游戏发行计划</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551224.html">首批安卓app上架谷歌商店</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+<li> <a href="/article/news/official/201409/1551225.html">星座和手游之间的秘密</a> <span><small>点击:</small>0</span> <span><small>评价:</small>0</span></li>
+
+          </ul>
+        </dd>
+        <!-- /uc_digg -->
+        <dd id="uc_comment">
+          <ul class="f2">
+<li> <small><a href="#" class="username">游客</a> 评论 <a href="/article/plus/feedback.php?aid=10093" class="title">宫崎骏渐行渐远，却</a></small>
+                <p>磊哥V587，你猜猜我是谁</p>
+            </li><li> <small><a href="#" class="username">游客</a> 评论 <a href="/article/plus/feedback.php?aid=10093" class="title">宫崎骏渐行渐远，却</a></small>
+                <p>那只可爱的龙猫 呆萌</p>
+            </li><li> <small><a href="#" class="username">游客</a> 评论 <a href="/article/plus/feedback.php?aid=10093" class="title">宫崎骏渐行渐远，却</a></small>
+                <p>回忆，心扉，大赞</p>
+            </li><li> <small><a href="#" class="username">游客</a> 评论 <a href="/article/plus/feedback.php?aid=10093" class="title">宫崎骏渐行渐远，却</a></small>
+                <p>泪奔~~o(_)o ~~</p>
+            </li><li> <small><a href="#" class="username">游客</a> 评论 <a href="/article/plus/feedback.php?aid=10093" class="title">宫崎骏渐行渐远，却</a></small>
+                <p>有些伤感</p>
+            </li>
+          </ul>
+        </dd>
+        <!-- /uc_comment -->
+        <dd id="uc_member" > 
+         <div id="_userlogin">       
+             <div class="userlogin">
+                <form name="userlogin" action="/article/member/index_do.php" method="POST">
+                <input type="hidden" name="fmdo" value="login" />
+                <input type="hidden" name="dopost" value="login" />
+                <input type="hidden" name="keeptime" value="604800" />
+                <div class="fb"><span>用户名:</span>
+                    <input type="text" name="userid" size="20" class="ipt-txt" />
+                </div>
+                <div class="fb"><span>密码:</span>
+                    <input type="password" name="pwd" size="20" class="ipt-txt" />
+                </div>                              
+                <div class="fb"><span>验证码:</span>
+                    <input type="text" name="vdcode" size="8" class="ipt-txt" />
+                    <img id="vdimgck" align="absmiddle" onClick="this.src=this.src+'?'" style="cursor:pointer;margin-left:0px;text-transform:uppercase;" alt="看不清？点击更换" src="/article/include/vdimgck.php"/></div>
+                <div class="submit">
+                  <button type="submit" class="btn-1">登录</button>
+                  <a href="/article/member/index_do.php?fmdo=user&dopost=regnew" >注册帐号</a> <a href="/article/member/resetpassword.php">忘记密码?</a> 
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /userlogin -->
+          <script language="javascript" type="text/javascript">CheckLogin();</script>
+          <div class="latestlogin"> <strong>最近登陆的会员</strong>
+              <ul class="e7">
+              <li><a href="http://www.joyme.com/member/index.php?uid=baizhen01" target="_blank"><img src="/article/member/templets/images/dfboy.png" alt='baizhen01的空间' width="52" height="52" />baizhen01</a></li>
+              </ul>
+          </div>
+          <!-- /latestlogin -->
+        </dd>
+        <!-- /uc_member -->
+      </dl>
+    </div>
+    <!-- /usercenter -->
+    <div class="commend mt1">
+      <dl class="tbox light">
+        <dt class='light'><strong>推荐内容</strong></dt>
+        <dd class='light'>
+          <ul class="c1 ico2">
+              <div id='dedecms'>
+<li class='dotline'><a href="/article/vip/hs/ztlm/tw/2014101554110.html">炉石卡牌中的那些彩蛋（二）</a></li>
+<li class='dotline'><a href="/article/vip/hs/tt/tw/2014101454002.html">分析：削弱后为何猎人依旧强势？...</a></li>
+<li class='dotline'><a href="/article/vip/hs/tt/tw/2014101454000.html">获胜的两个要素 单卡质量与节奏...</a></li>
+<li class='dotline'><a href="/article/vip/hs/fs/gl/2014101453993.html">虚灵奥秘流休闲法师分享</a></li>
+<li class='dotline'><a href="/article/vip/hs/zjgx/2014101453989.html">炉石传说大地之环小音专访</a></li>
+<li class='dotline'><a href="/article/vip/hs/tt/tw/2014101453985.html">利用率低但有潜力的五张卡牌</a></li>
+<li class='dotline'><a href="/article/vip/hs/qs/gl/2014101453972.html">来正面上我啊！神恩骑士怒与猎爹...</a></li>
+<li class='dotline'><a href="/article/vip/hs/ztlm/tw/2014101453949.html">炉石卡牌中的那些彩蛋（一）</a></li>
+    </div>
+
+          </ul>
+          <div class="c_page"><div id="page_dedecms"><a href='javascript:void(0)' class='thislink'>1</a> <a href='javascript:multi(2,"dedecms")' title='2'>2</a> </div></div> 
+        </dd>   
+      </dl>      
+    </div>
+    <!-- /commend -->
+    <div class="hot mt1">
+      <dl class="tbox light">
+        <dt class='light'><strong>本月热点</strong></dt>
+        <dd class='light'>
+          <ul class="c1 ico2">
+          	<li class='dotline'><a href="/article/vip/hs/zjgx/tt/2014092852539.html">炉石游戏厅第五期-Geass!王之力量！...</a></li>
+<li class='dotline'><a href="/article/vip/hs/zjgx/2014092952682.html">中韩大师赛今明决战 中国剑指卫冕...</a></li>
+<li class='dotline'><a href="/article/test/cs/ceshi11/2014/0926/52462.html">1111111111</a></li>
+<li class='dotline'><a href="/article/vip/hs/zs/kz/2014100853089.html">《炉石传说》天梯打脸战士卡牌推...</a></li>
+<li class='dotline'><a href="/article/test/phb/dongmangaibianshouyoupaixingbang/2014/0916/51479.html">我叫MT Online</a></li>
+<li class='dotline'><a href="/article/test/phb/dongmangaibianshouyoupaixingbang/2014/0917/51542.html">圣斗士星矢</a></li>
+
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <div class="vote mt1">
+      <dl class="tbox light">
+        <dt class='light'><strong>投票调查</strong></dt>
+<form name='voteform' method='post' action='/article/plus/vote.php' target='_blank'>
+<input type='hidden' name='dopost' value='send' />
+<input type='hidden' name='aid' value='1' />
+<input type='hidden' name='ismore' value='0' />
+        <dd class='light'> <strong>你是从哪儿得知本站的？</strong>  
+            <div class="fb">
+              <input type="radio" name='voteitem' value='1' />
+              朋友介绍</div>
+          <div class="fb">
+             <input type="radio" name='voteitem' value='2' />
+            门户网站的搜索引擎</div>
+          <div class="fb">
+            <input type="radio" name='voteitem' value='3' />
+            google或百度引擎</div>
+          <div class="fb">
+            <input type="radio" name='voteitem' value='4' />
+            别的网站上的链接</div>
+          <div class="fb">
+             <input type="radio" name='voteitem' value='5' />
+            其他途径</div>
+          <div class="submit">
+            <button type="submit" class="btn-1">投票</button>
+            <a href="plus/vote.php?dopost=view&aid=1" target="_blank">查看结果</a></div>
+        </dd>
+</form>
+      </dl>
+    </div>
+    <!-- /vote -->
+  </div>
+  <!-- /pleft -->
+</div>
+<div class="flink w960 center clear">
+	<dl class="tbox">
+		<dt>
+			<strong>友情链接</strong>
+			<span class="more">
+				<a href="plus/flink.php">所有链接</a> | <a href="plus/flink_add.php">申请加入</a>
+			</span>
+		</dt>
+		<dd>
+			<ul class="f5">
+				<li><a href='http://qmdgs.mofang.com' target='_blank'>全民打怪兽魔方网</a> </li><li><a href='http://qmfjdz.9game.cn/' target='_blank'>全民飞机大战</a> </li><li><a href='http://www.joyme.com/wiki/mt/index.shtml' target='_blank'>我叫Mt online</a> </li><li><a href='http://bhxy.7xz.com/' target='_blank'>崩坏学园2</a> </li><li><a href='http://www.dq247.com/' target='_blank'>dq247页游平台</a> </li><li><a href='http://qh.9377.com/' target='_blank'>枪魂</a> </li><li><a href='http://lscs.18183.com/' target='_blank'>18183炉石传说</a> </li><li><a href='http://ls.gm86.com/' target='_blank'>炉石传说攻略</a> </li><li><a href='http://ppsg.joyme.com/' target='_blank'>啪啪三国</a> </li><li><a href='http://www.joyme.com/wiki/tos/index.shtml' target='_blank'>神魔之塔</a> </li><li><a href='http://www.joyme.com/wiki/yh3/index.shtml' target='_blank'>永恒战士3</a> </li><li><a href='http://www.joyme.com/games/yxyzr/' target='_blank'>雨血：影之刃</a> </li><li><a href='http://www.joyme.com/wiki/dtcq/index.shtml' target='_blank'>刀塔传奇</a> </li><li><a href='http://www.joyme.com/wiki/szr/index.shtml' target='_blank'>神之刃</a> </li><li><a href='http://hs.joyme.com/' target='_blank'>炉石传说</a> </li><li><a href='http://qmdgs.joyme.com/' target='_blank'>全民打怪兽</a> </li><li><a href='http://cc.joyme.com/' target='_blank'>锁链战记</a> </li><li><a href='http://www.joyme.com/wiki/ttxd/index.shtml' target='_blank'>天天炫斗</a> </li><li><a href='http://www.joyme.com/games/dyfsy/' target='_blank'>钓鱼发烧友</a> </li>
+		  </ul>
+		</dd>
+	</dl>
+</div><!-- /flink -->
+
+<!-- //底部模板 -->
+
+     <span>© 2011－2014 joyme.com, all rights reserved</span>
+     <span> 京ICP备11029291号</span>
+    <a target="_blank" href="http://www.joyme.com/help/aboutus" rel="nofollow">关于着迷</a> |
+    <a target="_blank" href="http://www.joyme.com/about/job/zhaopin" rel="nofollow">工作在着迷</a> |
+    <a target="_blank" href="http://www.joyme.com/note/1CGoLChZ18yHHQJW_jVV1S" rel="nofollow">着迷认证</a> |
+    <a target="_blank" href="http://www.joyme.com/about/contactus" rel="nofollow">商务合作</a> |
+    <a href="mailto:contactus@joyme.com">联系我们</a>|
+     <a href="http://www.joyme.com/sitemap.htm">网站地图</a>
+<!-- /footer -->
+
+</body>
+</html>

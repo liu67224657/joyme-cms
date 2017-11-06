@@ -1,0 +1,361 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>导入WIKI管理</title>
+<link href='img/base.css' rel='stylesheet' type='text/css'>
+<link href='//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+<script language="javascript" src="../include/js/dedeajax2.js"></script>
+<script language="javascript" src="js/ieemu.js"></script>
+<script language="javascript" src="js/context_menu.js"></script>
+<script language="javascript" src="js/main.js"></script>
+<script language="javascript" src="js/list.js"></script>
+</head>
+<body background='img/allbg.gif' leftmargin='8' topmargin='8'>
+
+<!--  搜索表单  -->
+<form name='form1' action='archives_wiki_list.php' method='post'>
+<input type='hidden' name='dopost' value='listArchives' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#cfcfcf' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0' height="32" id="joymearctype">
+        <tr>
+        <td nowrap>
+         	 按wiki查找：
+        </td>
+        <td width='100' style="position:relative;">
+        	<input type="hidden" value='{dede:global.sid/}' name='sid' id='sid' />
+        	<input type="hidden" value='{dede:global.type/}' name='type' />
+          	<input type='text' name='wikikey' id='wikikey' autocomplete="off" value='{dede:global.wikikey/}' style='width:100px' />
+          	<div id="wikilist" style="position:absolute;top:25px;left:0px;border:grey solid 2px;background-color:#F9FCEF;display:none;"></div>
+        </td>
+        <td nowrap>
+         	 标题查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='title' value='{dede:global.title/}' style='width:120px' />
+        </td>
+        {dede:if global.type == 2}
+        <td nowrap>
+         	 文章ID查找：
+        </td>
+        <td width='50'>
+          	<input type='text' name='aid' value='{dede:global.aid/}' style='width:50px' />
+        </td>
+        {/dede:if}
+        {dede:if global.type == 2}
+        <td width='100'>
+        	<select name="sort">
+        		<option value="rec_time" <?php echo $sort=="rec_time"?' selected="selected"':''?>>按推荐时间查询</option>
+        		<option value="edit_time" <?php echo $sort=="edit_time"?' selected="selected"':''?>>按编辑时间查询</option>
+        	</select>
+        </td>
+        {/dede:if}
+       <td nowrap>
+       {dede:if global.type == 1}
+       	wiki编辑时间：
+       {else}
+       	起止时间：
+       {/dede:if}
+        </td>
+        <td width='360'>
+          	<input type='text' id='starttime' readonly="readonly" name='starttime' value='{dede:global.starttime/}' style='width:120px' />
+          	<select name="starttime2">
+          		<?php
+          		for($i=0;$i<=24;$i++){
+					if($starttime2 == $i){$str = ' selected="selected"';}else{$str='';}
+					echo '<option value="'.$i.'" '.$str.'>'.$i.'</option>';
+				}
+          		?>
+          	</select>
+          	-
+          	<input type='text' id='endtime' readonly="readonly" name='endtime' value='{dede:global.endtime/}' style='width:120px' />
+          	<select name="endtime2">
+          		<?php
+          		for($i=0;$i<=24;$i++){
+					if($endtime2 == $i){$str = ' selected="selected"';}else{$str='';}
+					echo '<option value="'.$i.'" '.$str.'>'.$i.'</option>';
+				}
+          		?>
+          	</select>
+        </td>
+        <td>
+          <input name="imageField" type="image" src="images/button_search.gif" width="60" height="22" border="0" class="np" />
+       </td>
+      </tr>
+     </table>
+   </td>
+  </tr>
+</table>
+</form>
+
+<form name="form2">
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D1DDAA">
+  <tr>
+   <td height="28" background="img/tbg.gif" colspan="7">
+     <b><a href="archives_wiki_list.php?type=1">未推荐</a> / <a href="archives_wiki_list.php?type=2">已推荐</a></b>
+	</td>
+  </tr>
+  <tr align="center" bgcolor="#F9FCEF" height="24"> 
+      <td width="5%">全选</td>
+      {dede:if global.type == 2}
+	  	<td width="15%">文章栏目</td>
+	  {/dede:if}
+      <td width="15%">WIKI名称</td>
+      <td width="35%">WIKI条目</td>
+	  <td>WIKI最后编辑时间</td>
+	  {dede:if global.type == 2}
+	  	<td>最后推荐日期</td>
+	  {/dede:if}
+  </tr>
+  {dede:datalist}
+  <tr align="center" bgcolor="#FFFFFF" height="24" onMouseMove="javascript:this.bgColor='#f4fbf4';" onMouseOut="javascript:this.bgColor='#FFFFFF';"> 
+      <td><input name="arcID" type="checkbox" id="arcID" value="{dede:field.id/}" class="np" /></td>
+      {dede:if global.type == 2}
+	  	<td>{dede:field.channle_name /}</td>
+	  {/dede:if}
+      <td>{dede:field.sid function='$sitelist[@me]["site_name"]'/}</td>
+      <td><a target="_blank" href="http://wiki.joyme.<?php echo $com;?>/{dede:field.sid function='$sitelist[@me]["site_key"]'/}/{dede:field.title /}">{dede:field.title /}</a></td>
+      <td>{dede:field.edit_time  function='GetDateTimeMk(@me) /}</td>
+      {dede:if global.type == 2}
+	  	<td>{dede:field.rec_time  function='GetDateTimeMk(@me) /}</td>
+	  {/dede:if}
+  </tr>
+  {/dede:datalist}
+  
+  <tr bgcolor="#ffffff">
+	<td height="36" colspan="15">
+		&nbsp;
+		<a href="javascript:selAll()" class="coolbg">全选</a>
+		<a href="javascript:noSelAll()" class="coolbg">取消</a>
+		{dede:if global.type == 1}
+			<a href="javascript:;" onClick="selectChannle(event)" class="coolbg">&nbsp;分配栏目&nbsp;</a>
+		{else}
+			<a href="javascript:;" onClick="updatewikiArc()" class="coolbg">&nbsp;更新&nbsp;</a>
+		{/dede:if}
+	</td>
+  </tr>
+
+  <tr align="right" bgcolor="#F9FCEF">
+	<td height="36" colspan="15" align="center">
+		{dede:pagelist listsize=3/}
+	</td>
+  </tr>
+</table>
+</form>
+
+<div id="selechannle" class="pubdlg" style="position: absolute; width: 700px; height: 300px; top: 100px; left: 100px;display:none;">
+	<div style="margin-top:10px;margin-left:10px;">
+		<div class="title" style="cursor:default;">
+			<div class="titLeft">分配栏目</div>
+			<div class="titRight">
+				<img src="images/ico-close.gif" style="cursor:pointer;" onclick="HideObj('selechannle');ChangeFullDiv('hide');" alt="关闭" title="关闭"/>
+			</div>
+		</div>
+		<div align="center" style="margin-top:50px;">
+			<form name="javascript:;" action="javascript:;" method="get">
+				请选择主栏目：<span id='typeidct'>
+		        <?php
+		          $typeOptions = GetOptionList(0,$cuserLogin->getUserChannel(),0);
+          		  echo "<select name='typeid' id='typeid' style='width:240px'>\r\n";
+          		  echo "<option value='0'>请选择栏目...</option>\r\n";
+         		  echo $typeOptions;
+         		  echo "</select>";
+				?>
+				</span>
+				<img src="img/menusearch.gif" style="cursor:pointer" onclick="ShowCatMap(event, this, 0, 'typeid', 0)" alt="快捷选择" title="快捷选择"/>
+				<br/><br/>
+				请选择副栏目：<span id="typeid2ct"></span>
+	            <input type="text" name="typeid2" id="typeid2" value="" style="float:none;width:200px;">
+	            <img src="img/menusearch2.gif" style="cursor:pointer;" onclick="ShowCatMap(event, this, 0, 'typeid2', '0')" alt="选择副栏目" title="选择副栏目">
+	            <br/><br/><br/>
+	            <input name="imageField" type="image" src="img/button_ok.gif" width="60" height="22" class="np" border="0" style="cursor:pointer" id="tijiao">
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script language="javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript">
+//ShowCatMap(event, this, 0, 'typeid', 0)
+jQuery(function($){  
+    $.datepicker.regional['zh-CN'] = {  
+        closeText: '关闭',  
+        prevText: '<上月',  
+        nextText: '下月>',  
+        currentText: '今天',  
+        monthNames: ['一月','二月','三月','四月','五月','六月',  
+        '七月','八月','九月','十月','十一月','十二月'],  
+        monthNamesShort: ['一','二','三','四','五','六',  
+        '七','八','九','十','十一','十二'],  
+        dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],  
+        dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],  
+        dayNamesMin: ['日','一','二','三','四','五','六'],  
+        weekHeader: '周',  
+        dateFormat: 'yy-mm-dd',  
+        firstDay: 1,  
+        isRTL: false,  
+        showMonthAfterYear: true,  
+        yearSuffix: '年'};  
+    $.datepicker.setDefaults($.datepicker.regional['zh-CN']);  
+});
+$(function(){
+ var dates = $("#starttime,#endtime");
+ var option;
+ var targetDate;
+ var optionEnd;
+ var targetDateEnd;
+ dates.datepicker({
+  showButtonPanel:false,
+  onSelect: function(selectedDate){ 
+   if(this.id == "starttime"){
+	   // 如果是选择了开始时间（startDate）设置结束时间（endDate）的最小时间和最大时间
+	   option = "minDate"; //最小时间
+	   var selectedTime = getTimeByDateStr(selectedDate);
+	   var minTime = selectedTime;
+	     //最小时间 为开第一个日历控制选择的时间
+	   targetDate = new Date(minTime); 
+	   //设置结束时间的最大时间
+	   optionEnd = "maxDate";
+	     //因为只能做三天内的查询 所以是间隔7天 当前时间加上7*24*60*60*1000
+	   targetDateEnd = new Date(minTime+7*24*60*60*1000);
+   }else{
+	   // 如果是选择了结束时间（endDate）设置开始时间（startDate）的最小时间和最大时间
+	   option = "maxDate"; //最大时间
+	   var selectedTime = getTimeByDateStr(selectedDate);
+	   var maxTime = selectedTime;
+	   targetDate = new Date(maxTime);
+	   //设置最小时间 
+	   optionEnd = "minDate";
+	   targetDateEnd = new Date(maxTime-7*24*60*60*1000);
+   }
+   dates.not(this).datepicker("option", option, targetDate); 
+   dates.not(this).datepicker("option", optionEnd, targetDateEnd); 
+  }
+ });
+});
+// 检查起始时间不能超过7天
+function checkTimeInOneMonth(startDate, endDate){
+    var startTime = getTimeByDateStr(startDate);
+ var endTime = getTimeByDateStr(endDate);
+ if((endTime - startTime) > 7*24*60*60*1000){
+  return false;
+ }
+ return true;
+}
+ 
+ 
+//根据日期字符串取得其时间
+function getTimeByDateStr(dateStr){
+ var year = parseInt(dateStr.substring(0,4));
+ var month = parseInt(dateStr.substring(5,7),10)-1;
+ var day = parseInt(dateStr.substring(8,10),10);
+ return new Date(year, month, day).getTime();
+}
+  
+function selectChannle(e){
+	var qstr=getCheckboxItem();
+	if(qstr ==''){
+		alert('请至少选择一篇文章');
+		return false;
+	}
+	var oname = 'selechannle';
+	var newobj = $Obj(oname);
+	newobj.style.display = "block";
+	ChangeFullDiv('show');
+}
+function getTypeName(key){
+	if(key == ''){
+		$('.quickselItem').show();
+	}else{
+		$('.quickselItem').each(function(i,v){
+			if($(v).text().toString().indexOf(key) === -1){
+				$(v).hide();
+			}
+		});
+	}
+}
+var upstatus = 0;
+function updatewikiArc(){
+	
+	var qstr=getCheckboxItem();
+	if(qstr ==''){
+		alert('请至少选择一篇文章');
+		return false;
+	}
+	if(upstatus == 1){
+		alert('正在更新中，请稍等');
+		return false;
+	}
+	upstatus = 1;
+	$.ajax({
+		url: 'archives_wiki_do.php?dopost=uptime',
+		type: "post",
+		async: false,
+		data: "&qstr="+qstr,
+		dataType: "json",
+		success: function (req) {
+			resMsg = req;
+			if(resMsg == 1){
+				window.location.reload();
+			}else{
+				alert('更新0篇');upstatus = 0;
+			}
+		},
+		error: function () {
+			alert('更新失败');upstatus = 0;
+		}
+	});
+}
+$('#tijiao').click(function(event){
+	var e = e|event;
+	if($('#typeid').val() == 0){
+		alert('主栏目不能为空');
+		return false;
+	}
+	HideObj('selechannle');
+	//添加内容
+	var qstr=getCheckboxItem();
+	fixupPos = true;
+	LoadQuickDiv(e, 'archives_wiki_addcontent.php?qstr='+qstr+'&typeid='+$('#typeid').val()+'&typeid2='+$('#typeid2').val()+'&rnd='+Math.random(), 'addcontent', '700px', 'auto');
+	//ChangeFullDiv('hide');
+});
+function selwiki(sid,wikiname){
+	$('#sid').val(sid);
+	$('#wikikey').val(wikiname);
+	$("#wikilist").html('');
+	$("#wikilist").hide();
+}
+$('#wikikey').keyup(function(){
+	var keyword = $('#wikikey').val();
+	if(keyword == ''){
+		$('#sid').val('0');
+		$("#wikilist").html('');
+		return false;
+	}
+	$.ajax({
+		url: 'archives_wiki_do.php?dopost=getsite',
+		type: "post",
+		async: false,
+		data: "&keyword="+keyword,
+		dataType: "json",
+		success: function (req) {
+			resMsg = req;
+			if(resMsg != ''){
+				var html = '';
+				for(var i in resMsg){
+	                 html += "<span onmouseover=\"javascript:this.bgColor='#f4fbf4';\" onClick=\"selwiki("+resMsg[i].site_id+",'"+resMsg[i].site_name+"');\">"+resMsg[i].site_name+"</span><br/>";
+				}
+				$("#wikilist").html(html);
+				$("#wikilist").show();
+			}
+		},
+		error: function () {
+			alert('wiki查询接口异常');
+		}
+	});
+});
+</script>
+</body>
+</html>

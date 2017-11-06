@@ -1,0 +1,141 @@
+{dede:config.pagesize value="20"/}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>阅读心情表情组管理</title>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.rb{ border-right:1px solid #666666 }
+.tb{ border-top:1px solid #666666 }
+</style>
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6" style="margin-bottom:6px">
+  <tr>
+	<td align="center" bgcolor="#F9FCEF"><a href="joyme_readimg_add.php"><button type="button">新增心情组</button></a></td>
+    <td height="30" style="padding-left:100px;" bgcolor="#F9FCEF"> 
+  <form action="joyme_readimg.php" name="form1" method="get">
+	  <table border="0" cellspacing="0" cellpadding="3">
+      <tr>
+          <td>心情组名称：</td>
+          <td><input name="title" type="text" id="title" size="12" style="width:120px" value="{dede:global name='title'/}" /></td>
+          <td>&nbsp;状态：</td>
+          <td>
+		    <select name="status" id="status" style="width:60px">
+				<option value="-1">全部</option>
+               <option value="0">停用</option>
+               <option value="1">启用</option>
+            </select>
+          </td>
+         <td>
+           <input name="imageField" class="np" type="image" src="images/button_search.gif" width="60" height="22" border="0" />
+          </td>
+        </tr>
+      </table>
+	  </form>
+    </td>
+  </tr>
+</table>
+<form name="form2">
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#cfcfcf">
+  <tr> 
+  <td height="28" colspan="10" background="images/tbg.gif">
+   <table width="99%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+       <td width="29%" style="padding-left:10px;"><strong>心情组列表</strong></td>
+     </tr>
+  </table>
+ </td>
+</tr>
+  <tr bgcolor="#FEFCEF" height="30" align="center"> 
+    <td width="10%">心情组ID</td>
+    <td width="5%">状态</td>
+    <td width="11%">操作</td>
+    <td width="20%">心情组名称</td>
+    <td width="5%">不错</td>
+    <td width="5%">囧</td>
+    <td width="5%">难过</td>
+	<td width="5%">嫌弃</td>
+    <td width="20%">创建时间</td>
+    <td>创建人</td>
+  </tr>
+{dede:datalist} 
+<tr height="26" align="center" bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';"
+  	 onMouseOut="javascript:this.bgColor='#FFFFFF';"> 
+  <td>{dede:field.id/}</td>
+  <td>
+	{dede:if $fields['status'] == 0}
+	停用
+	{else}
+	启用
+	{/dede:if}
+  </td>
+  <td><a href="joyme_readimg_edit.php?id={dede:field.id/}">编辑</a>
+  {dede:if $fields['status'] == 0}
+	<a href="javascript:void(0);" class="beuse" data-id="{dede:field.id/}">，启用</a>
+	{/dede:if}
+  </td>
+	<td>{dede:field.title/}</td>
+  <td><img src="{dede:field.img1/}" style="width:50px;height:50px;"></td>
+  <td><img src="{dede:field.img2/}" style="width:50px;height:50px;"></td>
+  <td><img src="{dede:field.img3/}" style="width:50px;height:50px;"></td>
+  <td><img src="{dede:field.img4/}" style="width:50px;height:50px;"></td>
+  <td>{dede:field.time/}</td>
+  <td align="center">
+    {dede:field.mid function=GetMemberName(@me)/}
+  </td>
+</tr>
+{/dede:datalist} 
+<tr bgcolor="#F9FCEF"> 
+ <td height="36" colspan="10" align="center">
+	{dede:pagelist listsize='6' /}
+ </td>
+</tr>
+</table>
+</form>
+<script src="http://static.joyme.com/js/jquery-1.9.1.min.js" language="javascript"></script>
+<script>
+$(".beuse").click(function(){
+	var cmshost = 'http://' + window.location.host;
+	var haveothreuse = true;
+	$.ajax({
+		url: cmshost+'/ja/joyme_readimg.php',
+		type: "post",
+		async: false,
+		data: {dopost:'checkuse'},
+		success: function (req) {
+			if(req == 'yes'){
+				haveothreuse = false;
+			}
+		},
+		error: function () {
+			alert('checkuse程序错误');
+		}
+	});
+	if(haveothreuse && !confirm('只能启用一组心情组，是否替换为当前的选择？')){
+		return false;
+	}
+	// 开始启用
+	var id = $(this).attr('data-id');
+	$.ajax({
+		url: cmshost+'/ja/joyme_readimg.php',
+		type: "post",
+		async: false,
+		data: {dopost:'beuse',id:id},
+		success: function (req) {
+			if(req == 'yes'){
+				alert('启用成功');
+				window.location.reload();
+			}else{
+				alert('启用失败');
+			}
+		},
+		error: function () {
+			alert('checkuse程序错误');
+		}
+	});
+});
+</script>
+</body>
+</html>

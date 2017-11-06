@@ -1,0 +1,5 @@
+<?php
+##测试HTML内容一
+//#<div align="center">这里是你要定义的HTML内容（前面的斜杠必须保留）</div>
+##测试HTML内容二
+//#<div align="center">这里是你要定义的HTML内容（前面的斜杠必须保留）</div>

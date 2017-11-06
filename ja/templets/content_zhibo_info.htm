@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<title>直播管理</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<script language="javascript" src="../include/js/dedeajax2.js"></script>
+<script language="javascript" src="js/ieemu.js"></script>
+<script language="javascript" src="js/context_menu.js"></script>
+<script language="javascript" src="js/main.js"></script>
+<script language="javascript" src="js/list.js"></script>
+</head>
+<body leftmargin="8" topmargin="8" background='images/allbg.gif' onLoad="ContextMenu.intializeContextMenu()">
+    <!--<input type="hidden" id="upimgtoken" value='/plus/api.php?a=getImageUptoken'>-->
+	<input type="hidden" id="upvideotoken" value='/plus/api.php?a=getVideoUptoken'>
+    <input type="hidden" id="reportermsg" value='<?php echo json_encode(array("msg"=>$reporterdata));?>'>
+    <input type="hidden" id="probimage" value=''>
+    <input type="hidden" id="probvideo" value=''>
+<!--<form action="content_zhibo_do.php" method="post" name="form1"  enctype="multipart/form-data">-->
+<input name="id" type="hidden" value="<?php echo $aid;?>"/>
+<input type='hidden' name='dopost' value='add' />
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D6D6D6">
+  <tr>
+    <td height="200" bgcolor="#FFFFFF" valign="top"><table width="100%" border="0" cellspacing="4" cellpadding="4">
+          <tr>
+		      <td height="25" align="center">选择主持人：</td>
+		      <td colspan="2">
+		          <select name="reporter" id="reporter">
+		              <option value="0">请选择主持人</option>
+		              <?php foreach($reporters as $val){
+                                if($zhibodata['compere'] == $val['id']){
+                                    echo '<option value="'.$val['id'].'" selected>'.$val['name'].'</option>';
+                                }else{
+                                    echo '<option value="'.$val['id'].'">'.$val['name'].'</option>';
+                                }
+                              }?>
+		            </select>
+		            <input type="button" value="锁定" id='lockreport'/>
+		     </td>
+		  </tr>
+          <tr>
+            <td height="25" align="center">输入内容：</td>
+            <td colspan="2">
+		<textarea rows="6" cols="50" name="description" id="description"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td height="25" align="center">iframe代码：</td>
+            <td colspan="2">
+		<textarea rows="6" cols="50" name="videoiframe" id="videoiframe"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td height="25" align="center">上传图片：</td>
+            <td colspan="2">
+                <form action="content_zhibo_upload.php" method="post" name="uploadimage" id="uploadimage" enctype="multipart/form-data" target="myform">
+				<div class="img-box" style="display:block;">
+                    <input type="file" id="upimg" name="upimg" accept="image/*" />
+					<!--<button id="upimage">上传图片</button>-->
+					<input type="hidden" name="image" value="true" />
+                    <span style="height:23px;display:none;" id="loading"><img src="images/loading.gif"/><span>
+                </div>
+                </form>
+				<!--<div class="img-box" style="display:block;">
+                    <button id="upimg">上传图片</button>
+                    <span style="height:23px;display:none;" id="upimgloading"><img src="images/loading.gif"/></span>
+                </div>-->
+                <div id="viewimg" style="width:120px;height:100px;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td height="25" align="center">上传视频：</td>
+            <td colspan="2">
+				<div class="img-box" style="display:block;">
+                    <button id="upvideo">上传视频</button>
+                    <span style="height:23px;display:none;" id="upvideoloading"><img src="images/loading.gif"/></span>
+                </div>
+                <div id="viewvideo" style="width:120px;height:100px;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td height="53" align="center">&nbsp;</td>
+            <td colspan="2">
+                <!--<input name="imageField" type="image" src="images/button_ok.gif" width="60" height="22" border="0" class="np" id="prob"/>-->
+                <button id="prob" width="60" height="22" border="1" data="true">提交</button>
+            </td>
+          </tr>
+          <tr>
+            <td height="25" align="center">内容列表：</td>
+            <td colspan="2">
+                <div style="width: 550px;height:600px;overflow:auto; border:1px solid #000000;">
+                    <table id="zhibocontent" style="width:100%" border="1px">
+                        <tr><th width="80%">直播内容</th><th width="10%">时间</th><th width="10%">操作</th></tr>
+                        <?php foreach($data as $val){
+                            echo '<tr><td>';
+							if(!empty($val['description'])){
+								echo $val['description'];
+							}else if(!empty($val['pic'])){
+								echo '[图片]';
+							}else if(!empty($val['expandstr']['video'])){
+								echo '[视频]';
+							}else if(!empty($val['expandstr']['videoiframe'])){
+								echo '[HTML]';
+							}else{
+								echo '[空值]';
+							}
+							echo '</td><td>'.date('H:i', $val['createTime']/1000).'</td><td><a href="javascript:;" class="zhibodel" data-id="'.$val['commentId'].'">删除</a></td></tr>';
+                        }?>
+                    </table>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td height="25" align="center"></td>
+            <td colspan="2">
+                <button type="button" onclick="upstatus(<?php echo $aid;?>)">结束直播</button>
+            </td>
+          </tr>
+          
+          
+        
+      </table></td>
+  </tr>
+</table><?php //var_dump($data);exit;?>
+<!--</form>-->
+<iframe name="myform" style="display:none;"></iframe>
+<script src="<?php echo $staticUrl;?>/js/plupload.full.min.js"></script>
+<script src="<?php echo $staticUrl;?>/js/qiniu.js"></script>
+<script src="<?php echo $staticUrl;?>/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+function imguploaded(data){
+	$('#viewimg').html('<img src="'+data+'" style="width:120px;height:100px;">');
+	$('#probimage').val(data);
+}
+function uploaderror(data){
+	alert(data);
+}
+//$('#upimage').click(function(){
+//	$('#uploadimage').submit();
+//});
+$('#upimg').change(function(){
+	$('#uploadimage').submit();
+});
+var locksta = 0;
+var precontent = '';
+$('#lockreport').click(function(){
+	if(locksta == 0){
+		$('#reporter').prop("disabled", true);
+		locksta = 1;
+		$(this).val('修改');
+		localStorage.setItem("reportermsg", $('#reportermsg').val());
+	}else{
+		$('#reporter').removeAttr("disabled");
+		locksta = 0;
+		$(this).val('锁定');
+	}
+	
+});
+
+function upstatus(aid){
+    var isDo = confirm("确认执行操作吗？");
+    if(isDo){
+        var newstatus = 2;
+        location = "content_zhibo_list.php?action=upstatus&aid="+aid+'&status='+newstatus+'&channelid=<?php echo $zhibodata["channel"]?>&cid=<?php echo $zhibodata["typeid"]?>';
+    }
+}
+    
+$(function(){
+	var reportermsg = {};
+    // 获取主持人信息
+    $('#reporter').change(function(){
+        var id = $(this).val();
+        if(id == 0) return false;
+        $.ajax({
+            url: '<?php echo $domain;?>/plus/api.php?a=getReportMsg&id='+id,
+            type: "post",
+            async: false,
+            data: {},
+            dataType: "jsonp",
+            jsonpCallback: "reportmsg",
+            success: function(req) {
+                $('#reportermsg').val(JSON.stringify(req));
+                reportermsg = req;
+            },
+            error: function() {alert('getReportMsg程序错误');}
+        });
+    });
+
+	//设置主持人
+	var reportermsgdata = localStorage.getItem('reportermsg');
+	if(reportermsgdata){
+		reportermsgdata = JSON.parse(reportermsgdata);
+		$("#reporter option").attr("selected", false);
+		$("#reporter option[value='"+reportermsgdata.msg.id+"']").attr("selected", true);
+		$("#reporter").prop('disabled', true);
+		$('#reportermsg').val(JSON.stringify(reportermsgdata));
+		locksta = 1;
+		$('#lockreport').val('修改');
+	}
+    
+    // 发布消息
+	$(window).keydown(function(event){
+		if(event.ctrlKey && event.keyCode == 13){
+			sbform();
+		}
+	});
+    $('#prob').on('click', sbform);
+	function sbform(){
+        var description = $('#description').val();
+        var defaultreporterid = <?php echo $zhibodata['compere'];?>;
+        var unikey = Date.parse(new Date());
+        var groupid = <?php echo $aid;?>;
+        var imagesrc = $('#probimage').val();
+        var videosrc = $('#probvideo').val();
+        var description = $('#description').val();
+        var videoiframe = $('#videoiframe').val();
+
+        if($('#reportermsg').val() == ''){
+            alert('请选择主持人');
+            return false;
+        }else if($('#reporter').attr('disabled') == undefined && defaultreporterid != $('#reporter').val()){
+            alert('请先锁定主持人');
+            return false;
+        }
+        if(description == '' && imagesrc == '' && videosrc == '' && videoiframe == ''){
+            alert('文本,图片,视频请至少选择一项内容填充发布');
+            return false;
+        }
+        var reportermsg = JSON.parse($('#reportermsg').val());
+        var expstr = {
+            video:videosrc,
+            videoiframe:videoiframe,
+            comperename:reportermsg.msg.name,
+            compereicon:reportermsg.msg.headicon,
+            comperetype:reportermsg.msg.type
+        };
+        if($('#prob').attr('data') == 'false' || (precontent != '' && precontent==description)){
+            return false;
+        }else{
+            $('#prob').attr('data', 'false');
+        }
+        precontent = description = description.replace(/\n|\r/gm, '<br\/>').trim('<br\/>');
+        $.ajax({
+            url: '<?php echo $apiUrl;?>/comment/bean/json/post',
+            type: "post",
+            async: false,
+            data: {'unikey':unikey,'domain':10,'groupid':groupid,'pic':imagesrc,'description':description,'expstr':JSON.stringify(expstr)},
+            dataType: "jsonp",
+            jsonpCallback: "reportmsg",
+            success: function(req) {
+                var html = ''
+                var res = req[0];
+                if(res.rs == 1){
+					//console.log('req:', req);
+					window.location.href=window.location.href;
+                }else{
+                    alert('发布失败');
+                }
+            },
+            error: function() {alert('prob程序错误');}
+        });
+    }
+    // 删除直播
+    $('.zhibodel').bind( 'click', zhibodel );
+    function zhibodel(){
+        var isDo = confirm("确认执行操作吗？");
+        if(!isDo){
+            return false;
+        }
+        var id = $(this).attr('data-id');
+        $(this).parent().parent().remove();
+        $.ajax({
+            url: '<?php echo $apiUrl;?>/comment/bean/json/del',
+            type: "post",
+            async: false,
+            data: {'cid':id},
+            dataType: "jsonp",
+            jsonpCallback: "reportmsg",
+            success: function(req) {
+               console.log(req);
+            },
+            error: function() {alert('prob程序错误');}
+        });
+    }
+	// 获取视频信息
+	//getVideoInfo('http://joymevideo.joyme.com/', 'z0.56d40a377823de0e4959ca06');
+	function getVideoInfo(id){console.log('id:', id);
+		var domain = '<?php echo $videourl;?>';
+        $.ajax({
+            url: '<?php echo $domain;?>/plus/api.php?a=getVideoInfo&id='+id,
+            type: "post",
+            async: false,
+            data: {},
+            dataType: "jsonp",
+            jsonpCallback: "getvideoinfo",
+            success: function(info) {console.log('info:',info);
+				if(info.code == 0){
+					$('#upvideoloading').hide();
+					var sourceLink = domain + info.items[0].key;
+					var html = '<video style="width:120px;height:100px;" controls="controls" poster="'+sourceLink+'?vframe/jpg/offset/1"><source src="'+sourceLink+'" type="video/mp4">你的浏览器不支持html5视频播放</video>';
+					$('#viewvideo').html(html);
+					$('#probvideo').val(sourceLink);
+					$('#prob').attr('data', 'true');
+				}else{
+					getVideoInfo(id);
+					//alert('error:'+info.desc);
+					console.log('errorinfo:',info);
+				}
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log('prob程序错误');
+			  
+ console.log('XMLHttpRequest', XMLHttpRequest); 
+ console.log('textStatus', textStatus); 
+ console.log('errorThrown', errorThrown);
+			}
+        });
+    }
+	/*视频上传*/
+	var uploader = Qiniu.uploader({
+		runtimes: 'html5,flash,html4',
+		browse_button: 'upvideo',
+		uptoken_url: '/plus/api.php?a=getVideoUptoken',
+		domain: "<?php echo $conf['qiniu']['attachurl'].'/';?>",
+		max_file_size: '500mb',
+		chunk_size: '4mb',
+		auto_start: true,
+		multi_selection:false,
+		filters: {
+			mime_types : [{title : "Video files", extensions : "flv,mpg,mpeg,avi,wmv,mov,asf,rm,rmvb,mkv,m4v,mp4"}],
+			//prevent_duplicates : true //不允许选取重复文件
+		},
+		init: {
+			'FilesAdded': function(up, files) {},
+			'BeforeUpload': function(up, file) {
+				$('#prob').attr('data', 'false');
+			},
+			'UploadProgress': function(up, file) {
+				$('#upvideoloading').show();
+			},
+			'FileUploaded': function(up, file, info) {
+				var domain = up.getOption('domain');
+				var res = JSON.parse(info);
+				//console.log('up:',up);
+				//up.getUpToken();
+				getVideoInfo(res.persistentId);
+				//var sourceLink = domain + res.key;
+                //var html = '<video style="width:120px;height:100px;" controls="controls" ><source src="'+sourceLink+'" type="video/mp4">你的浏览器不支持html5视频播放</video>';
+                //$('#viewvideo').html(html);
+                //$('#probvideo').val(sourceLink);
+//				   console.log('sourceLink:',sourceLink);
+//				   console.log('info:',info);
+			},
+			'Error': function(up, err, errTip) {
+				if(err.status == 614){
+					var domain = up.getOption('domain');
+					var date=new Date;
+					var year=date.getFullYear(); 
+					var month=date.getMonth()+1;
+					month =(month<10 ? "0"+month:month); 
+					var mydate = (year.toString()+month.toString());
+					var tmparr = err.file.type.split('/');
+					var key = 'article/'+tmparr[0]+'/'+mydate+'/'+err.file.name;
+					//console.log(domain+key);
+					var sourceLink = domain+key;
+					var html = '<video style="width:120px;height:100px;" controls="controls" ><source src="'+sourceLink+'" type="video/mp4">你的浏览器不支持html5视频播放</video>';
+					$('#viewvideo').html(html);
+					$('#probvideo').val(sourceLink);
+				}else{
+					alert(errTip);
+				}
+			},
+			'UploadComplete': function() {},
+			'Key': function(up, file) {
+				//var date=new Date;
+				//var year=date.getFullYear(); 
+				//var month=date.getMonth()+1;
+				//month =(month<10 ? "0"+month:month); 
+				//var mydate = (year.toString()+month.toString());
+                //var tmparr = file.type.split('/');
+                //if(file.type=='video/quicktime'){
+                //    var ext = 'mov';
+                //}else{
+                //    var ext = file.type.substr(file.type.indexOf('/')+1);
+                //}
+				//var key = 'article/'+tmparr[0]+'/'+mydate+'/'+date.getTime()+''+Math.round(Math.random()*1000)+'.mp4';
+				//return key;
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>

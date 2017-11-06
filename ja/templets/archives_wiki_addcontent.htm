@@ -1,0 +1,43 @@
+<form name="form3" action="archives_wiki_save.php" method='post'>
+	<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D1DDAA">
+	<tbody>
+	  <tr>
+	   <td height="28" background="img/tbg.gif" colspan="7">
+	     <b>补充内容</b>
+	     <div class="titRight">
+			<img src="images/ico-close.gif" style="cursor:pointer;" onclick="HideObj('addcontent');ChangeFullDiv('hide');" alt="关闭" title="关闭"/>
+		</div>
+		</td>
+	  </tr>
+	  <tr align="center" bgcolor="#F9FCEF" height="24"> 
+	      <td width="35%">文章标题</td>
+	      <td width="25%">缩略图</td>
+		  <td width="40%">文章摘要</td>
+	  </tr>
+	  {dede:datalist}
+	  <tr align="center" bgcolor="#FFFFFF" height="24" onMouseMove="javascript:this.bgColor='#f4fbf4';" onMouseOut="javascript:this.bgColor='#FFFFFF';"> 
+	      <td><input type="text" style="width:95%" name="titles[]" value="{dede:field.sid function='$sitelist[@me]["site_name"]'/}&nbsp;{dede:field.title /}" /></td>
+	      <td>
+	        <input name="wid[]" type="hidden" value="{dede:field.id /}" />
+	        <input name="time[]" type="hidden" value="{dede:field.edit_time /}" />
+	        <input name="url[]" type="hidden" value="{dede:field.id function="$deslist[@me]['url']" /}" />
+	        <input name="user[]" type="hidden" value="{dede:field.id function="$deslist[@me]['user']" /}" />
+	      	<input name="picname[]" type="text" id="picname{dede:field.id /}" style="width:240px"/>
+	      	<input type="button" name="Submit2" value="站内选择" style="margin-left:8px;" onclick="SelectImage('form3.picname{dede:field.id /}','small');" class="np coolbg">
+	      </td>
+	      <td>
+	      	<textarea name="des[]" rows="5" style="height:120px;width:90%;" {dede:field.id function="empty($deslist[@me]['des'])?'placeholder=\'该文章没有内容\'':''" /}>{dede:field.id function="$deslist[@me]['des']" /}</textarea>
+	      </td>
+	  </tr>
+	  {/dede:datalist}
+	</tbody>
+	</table>
+	<div align="center" style="margin-top:50px;">
+		<input type="checkbox" name="arcrank" value="0" />直接开放浏览
+	</div>
+	<div align="center" style="margin-top:30px;">
+		<input type='hidden' name='typeid' value='{dede:global.typeid /}' />
+		<input type='hidden' name='typeid2' value='{dede:global.typeid2 /}' />
+		<input name="imageField" type="image" src="img/button_ok.gif" width="60" height="22" class="np" border="0" style="cursor:pointer" id="awatijiao">
+	</div>
+</form>

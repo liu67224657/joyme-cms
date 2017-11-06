@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="../internal.js"></script>
+    <link rel="stylesheet" type="text/css" href="huabaopid.css">
+</head>
+<body>
+    <div id="bg_container" class="wrapper">
+        <div id="tabHeads" class="tabhead">
+            <span class="focus" data-content-id="normal">画报内容</span>
+            <span class="" data-content-id="imgManager" style="display:none;">画报图片</span>
+        </div>
+        <div id="tabBodys" class="tabbody">
+            <div id="normal" class="panel focus">
+                <fieldset class="bgarea">
+                    <legend><var id="lang_background_set"></var></legend>
+                    <div class="content">
+                        <div id="content_cats">
+                            <label><input id="daoyu" class="iptradio" type="radio" name="t" value="daoyu" checked="checked">导语</label>
+                            <label><input id="jieshuyu" class="iptradio" type="radio" name="t" value="jieshuyu">结束语</label>
+							<label><input id="duanluo" class="iptradio" type="radio" name="t" value="duanluo">段落</label>
+							<label><input id="html5" class="iptradio" type="radio" name="t" value="html5">html5</label>
+							<label><input id="cengji" class="iptradio" type="radio" name="t" value="cengji">层级</label>
+							<label><input id="color" class="iptradio" type="radio" name="t" value="color">图片注释</label>
+							<label><input id="t-video" class="iptradio" type="radio" name="t" value="t-video">M站视频</label>
+                        </div>
+                        <div class="wrapcolor pl">
+                            <label>文本内容:</label>
+							<textarea class="txt" type="text" id="content" rows="5"></textarea>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+
+            </div>
+            <div id="imgManager" class="panel">
+                <div id="imageList" style=""></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+		dialog.onok = function (){
+			var cats = $G('content_cats').children;
+			var cat = '';
+			for (var i = 0; i < cats.length; i++) {
+				if(cats[i].firstChild.checked){
+					cat = cats[i].firstChild.value;
+				}
+			}
+			var content = $G('content');
+			editor.execCommand('huabaopid', content.value, cat);
+			dialog.close();
+		};
+	</script>
+</body>
+</html>

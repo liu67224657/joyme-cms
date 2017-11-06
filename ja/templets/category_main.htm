@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>画报分类管理</title>
+<link href='img/base.css' rel='stylesheet' type='text/css'>
+</head>
+<body background='img/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D1DDAA">
+  <tr>
+   <td height="28" background="img/tbg.gif" colspan="7">
+     <b>画报分类管理</b>&nbsp;[<a href="category_edit.php"><u>增加一个新画报分类</u></a>]
+	</td>
+</tr>
+  <tr align="center" bgcolor="#F9FCEF" height="24"> 
+      <td width="8%">编号</td>
+      <td width="20%">画报分类名称</td>
+      <td width="20%">画报分类颜色</td>
+	  <td width="20%">状态</td>
+      <td width="18%">管理</td>
+   </tr>
+   {dede:datalist}
+    <tr align="center" bgcolor="#FFFFFF" height="24" onMouseMove="javascript:this.bgColor='#f4fbf4';" onMouseOut="javascript:this.bgColor='#FFFFFF';"> 
+        <td>{dede:field.id /}</td>
+        <td>{dede:field.typeName /}</td>
+        <td style="color:#{dede:field.typeColor /}">#{dede:field.typeColor /}</td>
+		<td>{dede:field.typeStatus /}</td>
+        <td>
+        	<a href='category_edit.php?id={dede:field.id /}&dopost=edit'>[更改]</a>
+			<!--a href='category_edit.php?id={dede:field.id /}&dopost=delete'>[删除]</a-->
+		</td>
+     </tr>
+		{/dede:datalist}
+   </table>
+   </td>
+</tr>
+</table>
+</body>
+</html>

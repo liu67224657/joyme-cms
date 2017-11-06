@@ -1,0 +1,14 @@
+<ul class="article-feel-box fn-clear">
+<?php
+	$sql = 'SELECT img1,img2,img3,img4 FROM article_cms.dede_joyme_readimg WHERE `status` = 1 LIMIT 1';
+	$res = $dsql->GetOne($sql);
+	$total = $mood1+$mood2+$mood3+$mood4;
+	$i = 0;
+	foreach($res as $key=>$val){
+		$i++;
+		$k = 'mood'.$i;
+		$percent = round(($$k/$total)*100).'%';
+		echo '<li><span><em style="height:'. $percent .';"></em></span><code>'.$$k.'('.$percent.')'.'</code><cite><img style="cursor:pointer;" src="'.$val.'" alt="" onclick="'.$js.'moodGet('.$i.');" /></cite></li>';
+	}
+?>
+</ul>

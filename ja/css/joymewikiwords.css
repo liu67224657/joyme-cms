@@ -1,0 +1,21 @@
+/*wiki words list*/
+*{font-family: "宋体";font-size: 12px;}
+div{margin:0;padding:0;}
+table{border-collapse:collapse;}
+.redtag{font-size: 12px;color: #fff;background: #ff5050;-webkit-border-radius: 10px;-moz-border-radius: 10px;-ms-border-radius: 10px;-o-border-radius: 10px;border-radius: 10px;height: 20px;width: auto;overflow: hidden;text-align: center;height: 17px;line-height: 18px;padding: 0 7px;}
+.btdiv{border:1px solid #ccc;background-color:#F9FCEF;height:27px;padding:8px 10px 0;}
+.btdiv div{display:inline-block;float:right;}
+.listdiv{margin:5px 0;height:35px;line-height:3em;}
+.listdiv .tdiv{border:1px solid #ccc;font-weight:bold;background-color:#F7F7F7;color:#666600;padding-left:10px;}
+.listdiv .plist{border:1px solid #ccc;background-color:#F7F7F7;text-align:center;}
+.listdiv .plist a,span{text-decoration:none;color:#000;margin:0 5px;}
+.listdiv .plist .on{color:#666600;}
+.listdiv table{border:1px solid #ccc;margin:5px 0;width:100%}
+.listdiv table tr:hover{background-color:#F9FCEF;}
+.listdiv table tr th input{float:left;}
+.listdiv table tr td,th{border:1px solid #ccc;padding:0 5px;}
+/*wiki word list*/
+.btdiv .wtdiv{font-weight:bold;color:#666600;float:left;line-height:20px;}
+.btdiv .wsdiv{display:inline-block;float:right;}
+/* wiki word add & edit*/
+.editdiv{margin:10px 0;}

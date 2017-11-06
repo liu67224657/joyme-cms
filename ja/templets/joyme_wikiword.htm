@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>WIKI词条列表</title>
+	<link href="css/joymewikiwords.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div>
+		<div class="btdiv">
+			<a href="/ja/joyme_wikiword_add.php?wikiid=<?php echo $wikiid;?>"><button>新增词条</button></a>
+			<button id="wordsDel">批量删除</button>
+			<button id="wordsRead">标记为已读</button>
+			<?php if(!$name):?>
+			<button id="allRead">全部标记为已读</button>
+			<?php endif;?>
+			<div>
+				<form action="/ja/joyme_wikiword.php" method="post">
+					<input type="hidden" name="wikiid" id="wikiid" value="<?php echo $wikiid;?>">
+					<input type="text" name="name" placeholder="请输入要查找的词条" value="<?php echo $name;?>">
+					<button>搜索</button>
+				</form>
+			</div>
+		</div>
+		<div class="listdiv">
+			<div class="tdiv"><?php echo $wikiname;?></div>
+			<table>
+				<tr>
+					<th>
+						<input type="checkbox" name="words[]" class="words" id="selAll" />
+					</th>
+					<th>词条</th>
+					<th>链接地址</th>
+					<th>操作</th>
+				</tr>
+				<?php foreach($list as $row):?>
+				<tr>
+					<td><input type="checkbox" name="words[]" class="words" value="<?php echo $row['keywordId'];?>" /></td>
+					<td>
+						<?php echo $row['keyword'];?>
+						<?php if($row['status']==0):?>
+						<span class="redtag"></span>
+						<?php endif;?>
+					</td>
+					<td><?php echo $row['url'];?></td>
+					<td><a href="javascript:;" class="wordDel" data-id="<?php echo $row['keywordId'];?>">删除</a></td>
+				</tr>
+				<?php endforeach;?>
+			</table>
+			<div class="plist">
+				<?php echo $pagelisthtml;?>
+				<!--
+				<a href="">首页</a>
+				<a href="">上一页</a>
+				<a href="">1</a>
+				<a href="" class="on">2</a>
+				<a href="">3</a>
+				<a href="">4</a>
+				<a href="">下一页</a>
+				<a href="">尾页</a>
+				<a href="">共35页341条</a>
+				-->
+			</div>
+		</div>
+	</div>
+<script src="http://static.joyme.com/js/jquery-1.9.1.min.js"></script>
+<script src="/ja/js/joymewikiwords.js"></script>
+</body>
+</html>

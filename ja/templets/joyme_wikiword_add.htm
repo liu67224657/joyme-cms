@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>JOYME WIKI 列表</title>
+	<link href="css/joymewikiwords.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div>
+		<div class="btdiv">
+			<div class="wtdiv">新增WIKI词条</div>
+		</div>
+		<div class="editdiv">
+			<form action="/ja/joyme_wikiword_add.php" method="post" id="editwikiwordform">
+			<table>
+				<tr>
+					<td>词条名称: </td>
+					<td><input type="text" name="word" value="" size="53"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>链接地址: </td>
+					<td>
+						<textarea rows="5" cols="50" name="wordurl"></textarea>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="hidden" name="wikiid" value="<?php echo $wikiid;?>">
+						<input type="submit" name="sb" value="提交">
+						<input type="button" name="qx" id="cancel" value="取消">
+					</td>
+					<td></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+<script src="http://static.joyme.com/js/jquery-1.9.1.min.js"></script>
+<script src="/ja/js/joymewikiwords.js"></script>
+</body>
+</html>

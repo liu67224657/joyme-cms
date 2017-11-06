@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>更改画报分类</title>
+<link href='img/base.css' rel='stylesheet' type='text/css'>
+<script language="javascript" src="../include/dedeajax2.js"></script>
+<script language='javascript' src='js/main.js'></script>
+</head>
+<body background='img/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#D1DDAA">
+<tr>
+  <td height="28" background="img/tbg.gif">
+  	&nbsp;<b><a href="category_main.php"><u>画报分类管理</u></a></b> &gt;&gt; 更改画报分类
+  </td>
+</tr>
+<tr>
+    <td height="200" bgcolor="#FFFFFF" valign="top">
+	<table width="100%" border="0" cellspacing="4" cellpadding="4">
+        <form action="category_edit.php" method="post" enctype="multipart/form-data" name="form1">
+          <input type='hidden' name='id' value='<?php echo isset($id) ? $id : '';?>'>
+          <input type='hidden' name='dopost' value='save'>
+           
+         <tr> 
+            <td height="25" align="center">画报分类名称：</td>
+            <td colspan="2"><input name="typeName" type="text" id="typeName" size="30" value="<?php echo isset($row['typeName']) ? $row['typeName'] : ''?>" class='iptxt' /></td>
+          </tr>
+          
+          <tr> 
+            <td height="25" align="center">画报分类颜色：</td>
+            <td colspan="2">
+            	<input name="typeColor" type="text" id="color" size="30" value="#<?php echo isset($row['typeColor']) ? $row['typeColor'] : '';?>" class='iptxt' />
+            	<input name="modcolor" type="button" id="modcolor" value="选取" onClick="ShowColor(event,this)" />
+            </td>
+          </tr>
+		  
+		  <tr> 
+            <td height="25" align="center">状态：</td>
+            <td colspan="2">
+            	<select name='typeStatus' id='typeStatus'>
+					<option value='1'>显示</option>
+					<option value='0' <?php if(isset($row['typeStatus']) && $row['typeStatus'] == '0'){echo 'selected="selected"';};?>>不显示</option>
+				</select>
+            </td>
+          </tr>
+		  
+		  <tr> 
+            <td height="25" align="center">文章类别：</td>
+            <td colspan="2">
+            	<select name='typeArticle' id='typeArticle'>
+					<option value='0'>native</option>
+					<option value='4' <?php if(isset($row['typeArticle']) && $row['typeArticle'] == '4'){echo 'selected="selected"';};?>>webview</option>
+				</select>
+            </td>
+          </tr>
+		  
+		  <tr> 
+            <td height="25" align="center">分类url：</td>
+            <td colspan="2"><input name="url" type="text" id="url" size="30" value="<?php echo isset($row['url']) ? $row['url'] : '';?>" class='iptxt' /></td>
+          </tr>
+          
+          <tr> 
+            <td height="53" align="center">&nbsp;</td>
+            <td colspan="2"><input name="imageField" type="image" src="img/button_ok.gif" width="60" height="22" border="0"></td>
+          </tr>
+        </form>
+      </table>
+	 </td>
+</tr>
+</table>
+</body>
+</html>

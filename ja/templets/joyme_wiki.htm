@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>JOYME WIKI 列表</title>
+	<link href="css/joymewikiwords.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div>
+		<div class="btdiv">
+			<div class="wtdiv">JOYME WIKI 列表</div>
+			<div class="wsdiv">
+				<form action="/ja/joyme_wiki.php" method="post">
+					<input type="text" name="name" placeholder="请输入要查找的WIKI" value="<?php echo $name;?>">
+					<button>搜索</button>
+				</form>
+			</div>
+		</div>
+		<div class="listdiv">
+			<table>
+				<tr>
+					<th>WIKI</th>
+					<th>词条数</th>
+					<th>操作</th>
+				</tr>
+				<?php foreach($list as $row):?>
+				<tr>
+					<td><?php echo $row['wikiName'];?></td>
+					<td><?php echo $row['keywordNum'];?></td>
+					<td>
+						<a href="/ja/joyme_wikiword.php?wikiid=<?php echo $row['wikiId'];?>&wikiname=<?php echo urlencode($row['wikiName']);?>">进入词条</a>
+						<?php if($row['newKeywordNum']):?>
+						<span class="redtag"><?php echo $row['newKeywordNum'];?></span>
+						<?php endif;?>
+					</td>
+				</tr>
+				<?php endforeach;?>
+			</table>
+			<div class="plist">
+				<?php echo $pagelisthtml;?>
+				<!--
+				<a href="">首页</a>
+				<a href="">上一页</a>
+				<a href="">1</a>
+				<a href="" class="on">2</a>
+				<a href="">3</a>
+				<a href="">4</a>
+				<a href="">下一页</a>
+				<a href="">尾页</a>
+				<a href="">共35页341条</a>
+				-->
+			</div>
+		</div>
+	</div>
+<script src="http://static.joyme.com/js/jquery-1.9.1.min.js"></script>
+<script src="/ja/js/joymewikiwords.js"></script>
+</body>
+</html>

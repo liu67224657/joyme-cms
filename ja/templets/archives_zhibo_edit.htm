@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>更改文档</title>
+<style type="text/css">
+<!--
+body { background-image: url(images/allbg.gif); }
+-->
+</style>
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="../include/js/dedeajax2.js"></script>
+<script language="javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/calendar/calendar.js"></script>
+<script language="javascript">
+<!--
+function checkSubmit()
+{
+   if(document.form1.title.value==""){
+	 alert("<?php echo $cInfos['titlename']; ?>不能为空！");
+	 document.form1.title.focus();
+	 return false;
+  }
+}
+-->
+</script>
+</head>
+<body topmargin="8">
+  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="65%" height="30"><IMG height=14 src="images/book1.gif" width=20>&nbsp;<a href="catalog_do.php?cid=<?php echo $arcRow['typeid']?>&channelid=<?php echo $channelid?>&dopost=listArchives"><u>文档列表</u></a> &gt;&gt; 更改文档</td>
+      <td width="30%" align='right'><?php echo $backurl; ?><a href="catalog_main.php">[<u>栏目管理</u>]</a>&nbsp;</td>
+    </tr>
+  </table>
+  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" id="head1" >
+    <tr>
+      <td colspan="2">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="84" height="24" align="center" background="images/itemnote1.gif">&nbsp;常规信息&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" id="head2" style="display:none">
+    <tr>
+      <td colspan="2"> <table height="24" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="84" align="center" background="images/itemnote2.gif"><a href="#" onClick="ShowItem1()"><u>常规信息</u></a>&nbsp;</td>
+            <td width="84" align="center" background="images/itemnote1.gif">高级参数</td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+<form id="form1" name="form1" action="archives_zhibo_edit.php" enctype="multipart/form-data" method="post" onSubmit="return checkSubmit();">
+<input type="hidden" name="channelid" value="<?php echo $channelid?>" />
+<input type="hidden" name="id" value="<?php echo $aid?>" />
+<input type="hidden" name="dopost" value="save" />
+  <table width="98%"  border="0" align="center" cellpadding="2" cellspacing="2" id="needset" style="border:1px solid #cfcfcf;background:#ffffff;">
+    <tr>
+      <td height="24" class="bline"><table width="800" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="90">&nbsp;直播名称：</td>
+          <td width='408'><input name="title" type="text" id="title" value="<?php echo $arcRow['title']; ?>" style="width:388px">          </td>
+          <td width="90"></td>
+          <td></td>
+        </tr>
+      </table></td>
+    </tr>
+     <tr>
+      <td height="24" colspan="4" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90">&nbsp;默认主持人：</td>
+            <td width='408'>
+              <?php
+				$i=0;
+				$sel = !empty($arcRow['tagid']) ? explode(',', $arcRow['tagid']) : array();
+			  ?>
+			  <?php foreach($reporters as $val):?>
+			  <?php if(in_array($val['id'], $sel)):?>
+			  <input type="checkbox" name="reporter[]" value="<?php echo $val['id'];?>" checked="checked"><?php echo $val['name'];?>
+			  <?php else:?>
+			  <input type="checkbox" name="reporter[]" value="<?php echo $val['id'];?>"><?php echo $val['name'];?>
+			  <?php endif;?>
+			<?php endforeach;?>
+             </td>
+            <td width="90"></td>
+          <td></td>
+          </tr>
+        </table>
+       </td>
+    </tr>
+    <tr id="pictable" style='<?php if($cInfos['needpic']==0) echo 'display:none'; ?>'>
+      <td height="24" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90" height="81">
+            	&nbsp;PC头图：<br/>
+            	&nbsp;           </td>
+            <td width="500">
+             <input name="picname" type="text" id="picname" style="width:300px" value="<?php echo $arcRow["litpic"]?>"><input type="button" name="Submit" value="浏览..." style="width:70px" onClick="SelectImage('form1.picname','');">
+            
+             </td>
+            <td align="center">
+            <img src="<?php if($arcRow["litpic"]!="") echo $arcRow["litpic"]; else echo "images/pview.gif";?>" width="150" height="100" id="picview" name="picview">
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+	<tr>
+      <td height="24" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90" height="81">
+            	&nbsp;WAP头图：<br/>
+            	&nbsp;           </td>
+            <td width="500">
+             <input name="clientpicname" type="text" id="clientpicname" style="width:300px" value="<?php echo $arcRow["clientpic"]?>"><input type="button" name="Submit" value="浏览..." style="width:70px" onClick="SelectImage('form1.clientpicname','');">
+             <input type="button" name="Submit2" value="裁剪" style="margin-left:8px;" onClick="imageCut('clientpicname');" class='np coolbg'/>
+             </td>
+            <td align="center">
+            <img src="<?php if($arcRow["clientpic"]!="") echo $arcRow["clientpic"]; else echo "img/pview.gif";?>" width="150" height="100" id="clientpicview" name="clientpicview">
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+	<tr>
+      <td height="24" colspan="4" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90">&nbsp;展示时间：</td>
+            <td width='408'>
+            <input type="text" class="iptxt" value="<?php echo date('Y-m-d H:i:s', $arcRow['pubdate']);?>" id="pubdate" name="pubdate">
+            <script type="text/javascript" language="javascript">
+				Calendar.setup({
+					inputField     :    "pubdate",
+					ifFormat       :    "%Y-%m-%d %H:%M",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+			</script>
+             </td>
+            <td width="90"></td>
+          <td></td>
+          </tr>
+        </table>
+       </td>
+    </tr>
+	<tr>
+      <td height="24" colspan="4" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90">&nbsp;发布时间：</td>
+            <td width='408'>
+            <input type="text" class="iptxt" value="<?php echo date('Y-m-d H:i:s', $arcRow['senddate']);?>" id="senddate" name="senddate">
+            <script type="text/javascript" language="javascript">
+				Calendar.setup({
+					inputField     :    "senddate",
+					ifFormat       :    "%Y-%m-%d %H:%M",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+			</script>
+             </td>
+            <td width="90"></td>
+          <td></td>
+          </tr>
+        </table>
+       </td>
+    </tr>
+	<tr>
+      <td height="24" colspan="4" class="bline">
+      	<table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90">&nbsp;地点：</td>
+            <td width='408'>
+            	<input name="address" type="text" id="address" value="<?php echo $arcRow['shorttitle'];?>" style="width:388px">
+             </td>
+            <td width="90"></td>
+          <td></td>
+          </tr>
+        </table>
+       </td>
+    </tr>
+    <?php if($cInfos['dfcid']>0)
+      {
+      	echo "<input type='hidden' name='typeid' value='{$cInfos['dfcid']}' />\r\n";
+      	echo "<input type='hidden' name='typeid2' value='' />\r\n";
+      }
+      else
+      {
+      ?>
+    <tr>
+      <td height="24" class="bline">
+      <table width="800" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90">&nbsp;直播栏目：</td>
+            <td>
+            <?php
+            $typeOptions = GetOptionList($arcRow['typeid'],$cuserLogin->getUserChannel(),$arcRow['channel']);
+            echo "<select name='typeid' id='typeid' style='width:240px'>\r\n";
+            if($arcRow["typeid"]=="0") echo "<option value='0' selected>请选择栏目...</option>\r\n";
+            echo $typeOptions;
+            echo "</select>";
+			     ?></td>
+          </tr>
+      </table>
+      </td>
+    </tr> 
+  <?php  }  ?>
+    <tr>
+     <td>
+      <?php
+        PrintAutoFieldsEdit($cInfos['fieldset'],$addRow);
+      ?>
+    </td>
+   </tr>
+  <tr>
+      <td height="24" class="bline"><table width="800" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="90" height="51">&nbsp;直播介绍：</td>
+          <td><textarea name="description" rows="3" id="description" style="width:60%"><?php echo $arcRow["description"]?></textarea></td>
+          </tr>
+      </table></td>
+    </tr>
+	<tr>
+      <td height="24" colspan="4" class="bline">
+      <table width="800" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="90">&nbsp;分享摘要：</td>
+          <td width="449"><textarea name="clientnote" rows="3" id="clientnote" style="width:60%"><?php echo $arcRow["clientnote"]?></textarea></td>
+          <td width="261">&nbsp;</td>
+        </tr>
+      </table>
+      </td>
+  </tr>
+  </table>
+
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#F9FCEF" style="border:1px solid #cfcfcf;border-top:none;">
+  <tr>
+    <td height="35">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1">
+        <tr>
+          <td width="17%">&nbsp;</td>
+          <td width="83%"><table width="214" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="115">
+                    <!--<input name="imageField" type="image" src="images/button_ok.gif" width="60" height="22" class="np" border="0" style="cursor:pointer">-->
+                    <button width="60" height="22" border="0" type="button" id="form1submit">确定</button>
+                </td>
+                <td width="99">
+                	<!--<img src="images/button_reset.gif" width="60" height="22" border="0" onClick="location.reload();" style="cursor:pointer">-->
+                    <button width="60" height="22" border="0" type="button" id="cancel">取消</button>
+                </td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</form>
+    <script src="<?php echo $staticUrl;?>/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script>
+        $('#form1submit').on('click', function(){
+            var isDo = confirm("确认执行操作吗？");
+            if(isDo){
+                $('#form1').submit();
+            }
+        });
+        
+        $('#cancel').on('click', function(){
+            var isDo = confirm("确认执行操作吗？");
+            if(isDo){
+                location="content_zhibo_list.php?channelid=29";
+            }
+        });
+        
+        function checkSubmit(){
+            var title = $('#title').val();
+            if(title == ''){
+                alert('直播名称不能为空');
+                return false;
+            }//else if(title.length>20){
+                //alert('直播名称不能长于20字符');
+                //return false;
+            //}
+            var compere = $('#compere').val();
+            if(compere == 0){
+                alert('请选择主持人');
+                return false;
+            }
+            var imgsrc = $('#picview').attr('src');
+            if(imgsrc == ''){
+                 alert('请上传头图');
+                return false;
+            }
+            var typeid = $('#typeid').val();
+            if(typeid == 0){
+                alert('请选择直播栏目');
+                return false;
+            }
+            var description = $('#description').val();
+            if(description == ''){
+                alert('请输入直播介绍');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

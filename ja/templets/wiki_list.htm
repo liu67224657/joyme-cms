@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文档管理</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<script language="javascript" src="../include/js/dedeajax2.js"></script>
+<script language="javascript" src="js/ieemu.js"></script>
+<script language="javascript" src="js/context_menu.js"></script>
+<script language="javascript" src="js/main.js"></script>
+<script language="javascript" src="js/list.js"></script>
+</head>
+<body leftmargin="8" topmargin="8" background='images/allbg.gif' onLoad="ContextMenu.intializeContextMenu()">
+
+<!--  搜索表单  -->
+<form name='form3' action='wiki_list.php' method='get'>
+<?php if(!empty($popen)){?>
+<input type='hidden' name='popen' value='<?php echo $popen;?>' />
+<?php } ?>
+<input type='hidden' name='dopost' value='listArchives' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#cfcfcf' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0' height="32" id="joymearctype">
+        <tr>
+        <td nowrap>
+          按key查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='wikikey' value='{dede:global.wikikey/}' style='width:120px' />
+        </td>
+        <td nowrap>
+          按标题查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='wikititle' value='{dede:global.wikititle/}' style='width:120px' />
+        </td>
+        <td nowrap>
+          按编辑查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='wikiediter' value='{dede:global.wikiediter/}' style='width:120px' />
+        </td>
+       <td>
+          <input name="imageField" type="image" src="images/button_search.gif" width="60" height="22" border="0" class="np" />
+       </td>
+      </tr>
+     </table>
+   </td>
+  </tr>
+</table>
+</form>
+
+<!--  内容列表   -->
+<form name="form2">
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#CFCFCF" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7" >
+	<td height="28" colspan="14" background="images/tbg.gif" style="padding-left:10px;">
+	◆ {dede:global.positionname/}文档列表 &nbsp;(使用鼠标右键弹出菜单)
+	</td>
+</tr>
+<tr align="center" bgcolor="#FBFCE2" height="25">
+	<td width="6%">ID</td>
+	<td width="20%">文章标题</td>
+        <td width="5%">更新时间</td>
+        <td width="4%">修改人</td>
+	<td width="4%">PC</td>
+        <td width="4%">M站</td>
+        <td width="4%">合计</td>
+        <td width="4%">评论</td>
+</tr>
+{dede:datalist}
+<tr align='center' bgcolor="#FFFFFF" height="26" align="center" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+	<td nowrap>
+		{dede:field.page_id/}
+	</td>
+	<td align='left'>
+            {dede:if !empty($wikidata) && !empty($wikidata[$fields['page_id']])}
+            <a href="{dede:global.wikidomain/}/{dede:global.wikikey/}/<?php echo $wikidata[$fields['page_id']]['page_id'];?>.shtml" target="_block">{dede:field.page_title/}</a>
+            {else}
+                <a href="{dede:global.wikidomain/}/{dede:global.wikikey/}/{dede:field.page_title/}" target="_block">{dede:field.page_title/}</a>
+            {/dede:if}
+	</td>
+    <td>
+        {dede:if $fields['rev_timestamp']}
+        <?php echo date('Y-m-d H:i', (strtotime($fields['rev_timestamp'])+28800));?>
+        {/dede:if}
+    </td>
+    <td>{dede:field.rev_user_text/}</td>
+	<td>{dede:field.page_id function='getPv(@me, $wikidata, "pcpv")'/}</td>
+    <td>{dede:field.page_id function='getPv(@me, $wikidata, "mpv")'/}</td>
+    <td>{dede:field.page_id function='getPv(@me, $wikidata, "sumpv")'/}</td>
+    <td>{dede:field.page_id function='getPv(@me, $wikidata, "ctotal")'/}</td>
+</tr>
+    {/dede:datalist}
+</form>
+<tr align="right" bgcolor="#F9FCEF">
+	<td height="36" colspan="14" align="center">
+		{dede:pagelist listsize=3/}
+	</td>
+</tr>
+</table>
+
+</body>
+</html>

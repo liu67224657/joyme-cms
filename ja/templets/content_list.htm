@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文档管理</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<script language="javascript" src="../include/js/dedeajax2.js"></script>
+<script language="javascript" src="js/ieemu.js"></script>
+<script language="javascript" src="js/context_menu.js"></script>
+<script language="javascript" src="js/main.js"></script>
+<script language="javascript" src="js/list.js"></script>
+</head>
+<body leftmargin="8" topmargin="8" background='images/allbg.gif' onLoad="ContextMenu.intializeContextMenu()">
+
+<!--  快速转换位置按钮  -->
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#ccd9b9" align="center">
+<tr>
+ <td height="26" background="images/newlinebg3.gif">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="center">
+  <input type='button' class="coolbg np" onClick="location='catalog_do.php?channelid={dede:global.channelid/}&cid={dede:global.cid/}&dopost=addArchives';" value='添加文档' />
+  {dede:if $adminid==$mid }
+	<input type='button' class="coolbg np" onClick="location='content_list.php?cid={dede:global.cid/}&mid=0';" value='全部文档' />
+	{else}
+	<input type='button' class="coolbg np" onClick="location='content_list.php?cid={dede:global.cid/}&mid=<?php echo $cuserLogin->getUserID(); ?>';" value='我的文档' />
+	{/dede:if}
+	{dede:global.CheckUserSend/}
+ <input type='button' class="coolbg np" onClick="location='catalog_main.php';" value='栏目管理' />
+ <input type='button' class="coolbg np" name='bb1' onClick="location='makehtml_list.php?cid={dede:global.cid/}';" value='更新列表' />
+ <input type='button' class="coolbg np" name='bb2' onClick="location='makehtml_archives.php?cid={dede:global.cid/}';" value='更新文档' />
+ <input type='button' class="coolbg np" name='bb1' onClick="location='recycling.php?cid={dede:global.cid/}';" value='文章回收站' />
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- 画报标签按钮 -->
+{dede:if global.cid==367 || global.cid==368 }
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#ccd9b9" align="center">
+<tr>
+ <td height="26" background="images/newlinebg3.gif">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="center" id="huabaotagid">
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+{/dede:if}
+<!--  内容列表   -->
+<form name="form2">
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#CFCFCF" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7" >
+	<td height="28" colspan="15" background="images/tbg.gif" style="padding-left:10px;">
+	◆ {dede:global.positionname/}文档列表 &nbsp;(使用鼠标右键弹出菜单)
+	</td>
+</tr>
+<tr align="center" bgcolor="#FBFCE2" height="25">
+	<td width="6%">ID</td>
+	<td width="4%">选择</td>
+	<td width="20%">文章标题</td>
+	<td width="6%">更新时间</td>
+	<td width="10%">栏目</td>
+        <td width="10%">关联游戏</td>
+	<td width="4%">PC</td>
+        <td width="4%">M站</td>
+        <td width="4%">玩霸</td>
+        <td width="4%">合计</td>
+        <td width="4%">评论</td>
+	<td width="4%">HTML</td>
+	<td width="4%">权限</td>
+	<td width="4%">发布人</td>
+	<td width="8%">操作</td>
+</tr>
+{dede:datalist}
+<tr align='center' bgcolor="#FFFFFF" height="26" align="center" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+	<td nowrap>
+		{dede:field.id/}
+	</td>
+	<td>
+		<input name="arcID" type="checkbox" id="arcID" value="{dede:field.id/}" class="np" />
+	</td>
+	<td align='left'>
+		<span id="arc{dede:field.id/}">
+			<a href='archives_do.php?aid={dede:field.id/}&dopost=editArchives'
+				 oncontextmenu="ShowMenu(event,this,{dede:field.id/},'{dede:field.title function="str_replace('\'', '', @me)" /}')">
+				<u>{dede:field.title/}</u>
+			</a>
+		</span>
+		{dede:field.flag function='IsCommendArchives(@me)'/}
+	</td>
+	<td>{dede:field.pubdate function='GetDateMk(@me)'/}</td>
+        
+	<td>
+            <a href='content_list.php?joymearctypes={dede:field.typeid/}'>{dede:field.typeid function='GetTypename(@me)'/}</a>
+            {dede:field.joymearctypes function='GetTypes(@me, $fields["typeid"])'/}
+        </td>
+        <td>{dede:field.id function='getArcGames(@me, $arcgamedata)'/}</td>
+	<td>{dede:field.id function='getPv(@me, $pvdata, "pcPv")'/}</td>
+        <td>{dede:field.id function='getPv(@me, $pvdata, "mPv")'/}</td>
+        <td>{dede:field.id function='getPv(@me, $pvdata, "wanbaPv")'/}</td>
+        <td>{dede:field.id function='getPv(@me, $pvdata, "pvSum")'/}</td>
+        <td>{dede:field.id function='getPv(@me, $pvdata, "replySum")'/}</td>
+	<td>{dede:field.ismake function="IsHtmlArchives(@me)"/}</td>
+	<td>{dede:field.arcrank function="GetRankName(@me)"/}</td>
+        <td><a href="<?php echo $domain?>/ja/content_list.php?author={dede:field.mid/}">{dede:field.mid function=GetMemberName(@me)/}</a></td>
+	<?php if(!empty($popen)){?>
+	<td>
+		<input type='hidden' value='{dede:field.id function="geturl(@me)"/}' id='url{dede:field.id/}' />
+		<a href="javascript:;" onclick="faddrelevance({dede:field.id/}, <?php echo intval($popen);?>);">快捷插入</a>
+	</td>
+	<?php }else{ ?>
+	<td>
+		<img src='img/trun.gif' title="编辑属性" alt="编辑属性" onClick="QuickEdit({dede:field.id/}, event, this);" style='cursor:pointer' border='0' width='16' height='16' />
+		<img src='img/gtk-edit.png' title="编辑" alt="编辑" onClick="editArc({dede:field.id/});" style='cursor:pointer' border='0' width='16' height='16' />
+		<img src='img/part-list.gif' title="预览" alt="预览" onClick="viewArc({dede:field.id/});" style='cursor:pointer' border='0' width='16' height='16' />
+		<a href="archives_do.php?aid={dede:field.id/}&dopost=viewArchives&marticle=1" target="_blank"><img src='img/mview.jpg' title="marticle预览" alt="marticle预览" style='cursor:pointer' border='0' width='16' height='16' /></a>
+	</td>
+	<?php } ?>
+</tr>
+{/dede:datalist}
+<tr bgcolor="#ffffff">
+<td height="36" colspan="15">
+	&nbsp;
+	<a href="javascript:selAll()" class="coolbg">全选</a>
+	<a href="javascript:noSelAll()" class="coolbg">取消</a>
+	<a href="javascript:updateArc(0)" class="coolbg">&nbsp;更新&nbsp;</a>
+	<a href="javascript:checkArc(0)" class="coolbg">&nbsp;审核&nbsp;</a>
+	<a href="javascript:adArc(0)" class="coolbg">&nbsp;推荐&nbsp;</a>
+	<a href="javascript:;" onClick="moveArc(event,this,<?php echo (empty($channelid) ? 0 : $channelid); ?>)" class="coolbg">&nbsp;移动&nbsp;</a>
+	<a href="javascript:delArc(0)" class="coolbg">&nbsp;删除&nbsp;</a>
+	<?php if($channelid==1) echo "	<a href=\"javascript:kwArc(0)\" class=\"coolbg\">&nbsp;自动关键字&nbsp;</a>\r\n"; ?>
+	<a href="javascript:;" onClick="cAtts('attsAdd',event,this)" class="coolbg">&nbsp;增加属性&nbsp;</a>
+	<a href="javascript:;" onClick="cAtts('attsDel',event,this)" class="coolbg">&nbsp;删除属性&nbsp;</a>
+</td>
+</tr>
+</form>
+<tr align="right" bgcolor="#F9FCEF">
+	<td height="36" colspan="15" align="center">
+		{dede:pagelist listsize=3/}
+	</td>
+</tr>
+</table>
+
+<!--  搜索表单  -->
+<form name='form3' action='content_list.php' method='get'>
+<?php if(!empty($popen)){?>
+<input type='hidden' name='popen' value='<?php echo $popen;?>' />
+<?php } ?>
+<input type='hidden' name='dopost' value='listArchives' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#cfcfcf' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0' height="32" id="joymearctype">
+        <tr>
+          <td width='160'>
+          <?php //echo str_replace('</tr>', '', str_replace('<tr>', '', $typeidSelectHtml));?>
+          <select name='cid' style='width:150px'>
+          <option value='0'>选择栏目...</option>
+          	{dede:global.optionarr /}
+          </select>
+        </td >
+        <td nowrap>
+          按标题查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='keyword' value='{dede:global.keyword/}' style='width:120px' />
+        </td>
+        <td nowrap>
+          按游戏查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='game' value='{dede:global.game/}' style='width:120px' />
+        </td>
+        <td nowrap>
+          按发布人查找：
+        </td>
+        <td width='130'>
+          	<input type='text' name='author' value='{dede:global.author/}' style='width:120px' />
+        </td>
+        <!--
+        <td width='90'>
+    		<select name='orderby' style='width:80px'>
+            <option value='id'>排序...</option>
+            <option value='pubdate'>更新时间</option>
+            <option value='sortrank'>置顶权值</option>
+            <option value='click'>点击量</option>
+            <option value='scores'>评论积分</option>
+            <option value='lastpost'>最后评论</option>
+      	</select>
+      </td>
+      <td width='90'>
+    		<select name='flag' style='width:80px'>
+            <option value=''>属性...</option>
+            {dede:global.flagsArr /}
+      	</select>
+      </td>
+        -->
+       <td>
+          <input name="imageField" type="image" src="images/button_search.gif" width="60" height="22" border="0" class="np" />
+       </td>
+      </tr>
+     </table>
+   </td>
+  </tr>
+</table>
+</form>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+<!--
+	function faddrelevance(id, type){
+            if(type == 1){
+                title = $('#arc'+id).find('u').html();
+		url = $('#url'+id).val();
+		html = '<tr><td><input type="text" name="relevancetitle[]" value="'+title+'" style="width:200px;"/></td><td><input type="text" name="relevanceurl[]" value="'+url+'" style="width:200px;"/></td><td><select name="relevancetype[]"><option value="1">CMS文章单页（marticle）</option></select></td><td><a href="javascript:;" onclick="delrelevance(this);"><img title="清空回收站" alt="清空回收站" src="img/gtk-del.png"></a></td></tr>';
+		window.opener.addrelevance(html);
+		if(confirm("插入成功，继续添加？") == false){
+			window.close();
+		}
+            }else if(type == 2){
+                window.opener.addwenzhangid(id);
+//		if(confirm("插入成功，继续添加？") == false){
+//			window.close();
+//		}
+            }
+	}
+//-->
+        var host = window.location.host.substr(window.location.host.indexOf('.'));
+	window.api		= 'http://api'+host+'/';
+        var cid = {dede:global.cid/};
+        if(cid == 367 || cid == 368){
+            getGuanZhuTag();
+        }
+	function getGuanZhuTag() {
+		var url = window.api+'joymeapp/gameclient/api/tagphp/getarticle'; // test
+		//var url = 'http://172.16.76.54/joymeapp/gameclient/api/tagphp/getarticle'; // local
+		//var url = 'http://api.joyme.com/joymeapp/gameclient/api/tagphp/getarticle'; // online
+		$.ajax({
+			url: url,
+			type: "post",
+			async: false,
+			data: "&archivesid=0",
+			dataType: "jsonp",
+			jsonpCallback: "getarticlecallback",
+			success: function (req) {
+				var guanzhutag = '';
+				var displaytag = '';
+				var resMsg = req[0];
+
+				if(resMsg.rs == '1'){
+                                        var html = '';
+					for(var i in resMsg.result.rows){
+                                            html += "<input type='button' class='coolbg np' onClick=\"location='catalog_do.php?popen=<?php echo empty($_GET['popen'])?'':intval($_GET['popen']);?>&cid={dede:global.cid/}&dopost=listArchives&tagid="+resMsg.result.rows[i].tagid+"';\" value='"+resMsg.result.rows[i].tagname+"' />&nbsp;";
+					}
+					$("#huabaotagid").html(html);
+				}else{
+					$("#huabaotagid").html('关注标签获取数据接口出错');
+				}
+			},
+			error: function () {
+				$("#huabaotagid").html('关注标签获取数据接口出错');
+			}
+		});
+	}
+var joymearctypes = <?php echo $joymearctypes;?>
+</script>
+<script type="text/javascript" src="/ja/js/joymecms.js?v=0.1"></script>
+</body>
+</html>
